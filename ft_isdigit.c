@@ -10,23 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
 int ft_isdigit(int c)
 {
 	return(c >= 48 && c <= 57);
-}
-
-int main()
-{
-	char a = 'c';
-	if(ft_isdigit(a))
-	{
-		write(1,"y", 1);
-	}
-	else
-	{
-		write(1, "n", 1);
-	}
-	return 0;
 }
