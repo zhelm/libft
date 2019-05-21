@@ -1,28 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 13:44:02 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/20 14:27:18 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/21 12:46:46 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/21 12:58:05 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <stdio.h>
 
-size_t ft_strlen(const char *s)
+char *strcat(char *restrict s1, const char *restrict s2)
 {
-	size_t len;
+	size_t i;
+	size_t b;
 
-	len = 0;
-	while(s[len])
-		len++;
-	return len;
+	i = 0;
+	b = 0;
+	while(s1[i])
+	{
+		i++;
+	}
+	while(s2[b])
+	{
+		s1[i] = s2[b];
+		b++;
+		i++;
+	}
+	s1[i] = '\0';
+	return s1;
 }
 
 int main()
 {
-	printf("%lu", ft_strlen("Hello World");
+	char c[] = "Hello";
+	char b[] = "World";
+
+	printf("%s", strcat(c,b));
 	return 0;
 }

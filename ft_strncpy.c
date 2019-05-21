@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 13:44:02 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/20 14:27:18 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/21 11:23:39 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/21 12:57:43 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 #include <stdio.h>
 
-size_t ft_strlen(const char *s)
+char *ft_strncpy(char *dst, const char *src, size_t len)
 {
-	size_t len;
+	size_t i;
 
-	len = 0;
-	while(s[len])
-		len++;
-	return len;
+	i = 0;
+
+	while(src[i] && i < len)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while(i < len)
+	{
+		dst[i] = '%';
+		i++;
+	}
+	return dst;
 }
 
 int main()
 {
-	printf("%lu", ft_strlen("Hello World");
-	return 0;
+	char c[] = "hello";
+	char *b;
+
+	printf("%s",ft_strncpy(b, c, 4));
 }
