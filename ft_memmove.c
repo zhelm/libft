@@ -1,43 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 12:46:46 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/22 12:32:06 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/22 13:09:46 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/22 14:39:01 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <string.h>
 
-char *ft_strcat(char *s1, const char *s2)
+void *ft_memmove(void *dst, const void *src, size_t n)
 {
+	char tmp[n];
+	char *dst1;
+	const char *src1;
 	size_t i;
-	size_t b;
 
 	i = 0;
-	b = 0;
-	while(s1[i])
+	dst1 = (char *)dst;
+	src1 = (const char *)src;
+
+	while(i < n)
 	{
+		tmp[i] = src1[i];
 		i++;
 	}
-	while(s2[b])
+	i = 0;
+	while(i < n)
 	{
-		s1[i] = s2[b];
-		b++;
+		dst1[i] = tmp[i];
 		i++;
+		
 	}
-	s1[i] = '\0';
-	return s1;
+	return dst;
 }
 
 int main()
 {
-	char c[] = "Hello";
-	char b[] = "World";
-
-	printf("%s", ft_strcat(c,b));
+	char b[12] = "Hello World";
+	char d[12] = "Hello World";
+	char a[100];
+	char c[100];
+	//memmove(a+1, b, strlen(b) +1);
+	ft_memmove(c+1, d, (strlen(d) + 1));
+	//printf("%s\n", a);
+	printf("%s\n", (c + 1));
 	return 0;
 }
