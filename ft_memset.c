@@ -1,54 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 07:22:48 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/22 08:36:04 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/22 07:03:30 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/22 09:22:36 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
-int ft_atoi(const char *str)
+#include <string.h>
+void *ft_memset(void *b, int c, size_t len)
 {
 	int i;
-	int s;
-	int r;
-
-	s = 1;
+	char *s = (char *)b;
+	unsigned char f = (unsigned char)c;
 	i = 0;
-	r = 0;
-	while(str[i] == ' ' || str[i] == '\t' || str[i] == '\n' ||
-			str[i] == '\v' || str[i]== '\f' || str[i] == '\r')
-	{
+	while (i < len)
+	{	
+		s[i] = f;
 		i++;
 	}
-
-	if(str[i] == '-')
-	{
-		s *= -1;
-		i++;	
-	}
-	else if(str[i] == '+')
-	{
-		i++;
-	}
-	while(str[i] >= 48 && str[i] <= 57)
-	{
-		r = r*10 + str[i] - 48;
-		i++;
-	}
-	return(r * s);
-
+	return b;
 }
 
 int main()
 {
-	char c[] = "-12 34B4323";
-	printf("%i", ft_atoi(c));
+	char b[12] = "Hello World";
+	printf("%s\n", ft_memset(b + 3, '*', 4));
+	printf("%s", b);
 	return 0;
 }

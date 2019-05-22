@@ -1,54 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 07:22:48 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/22 08:36:04 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/22 09:56:38 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/22 10:30:29 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
+#include<string.h>
 #include <stdio.h>
-#include <stdlib.h>
-int ft_atoi(const char *str)
+
+void *ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int i;
-	int s;
-	int r;
+	char *a = (char *)dst;
+	const char *b = (const char *)src;
+	size_t i;
 
-	s = 1;
 	i = 0;
-	r = 0;
-	while(str[i] == ' ' || str[i] == '\t' || str[i] == '\n' ||
-			str[i] == '\v' || str[i]== '\f' || str[i] == '\r')
+	while(i < n)
 	{
+		a[i] = b[i];
 		i++;
 	}
-
-	if(str[i] == '-')
-	{
-		s *= -1;
-		i++;	
-	}
-	else if(str[i] == '+')
-	{
-		i++;
-	}
-	while(str[i] >= 48 && str[i] <= 57)
-	{
-		r = r*10 + str[i] - 48;
-		i++;
-	}
-	return(r * s);
-
+	return dst;
 }
 
 int main()
 {
-	char c[] = "-12 34B4323";
-	printf("%i", ft_atoi(c));
+	char a[12] = "Hello World";
+	char b[12] = "Hello World";
+	char c[13];
+	char d[13];
+	
+	printf("%s|\n", a);
+	printf("%s|\n", memcpy(c, a, 5));
+	printf("\n%s|\n", b);
+	printf("%s|\n", ft_memcpy(d, b, 4));
 	return 0;
 }
