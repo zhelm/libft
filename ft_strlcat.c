@@ -10,31 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <bsd/string.h>
 #include <stdio.h>
 
-size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t i;
+	size_t n;
 	char *dest = (char *)dst;
 	const char *source = (const char *)src;
 
+	n = 0;
 	i = 0;
 	while(dest[i])
 		i++;
-	while(i < n)
+	while(source[n] && i < dstsize -1)
 	{
-		dest[i] = source[i];
+		dest[i] = source[n];
+		n++;
 		i++;
 	}
 	dest[i] = '\0';
-	return ((sizeof(source)-;
+	return (i);
 }
 
 int main()
 {
-	char c[20] = "hello World";
-	char b[] = "Hello World  ";
-
-	printf("%lu", strlcpy(c, b, 30));
+	char c[18] = "hello World";
+	char b[] = "hello          hello";
+	printf("%ld", ft_strlcat(c, b, 18));
+//	printf("%ld", strlcat(c, b, 30));
+	printf("%s", c);
+	return 0;
 }
