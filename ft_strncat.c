@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 13:17:54 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/21 15:50:37 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/23 11:27:31 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 char *ft_strncat(char  *restrict s1, const char *restrict s2, size_t len)
 {
 	int d;
-	int c;
+//	int c;
 	d = (*s1/sizeof(char));
 	printf("%d", d);
 

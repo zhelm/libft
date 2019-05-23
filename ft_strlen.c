@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:44:02 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/20 14:27:18 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/23 11:26:48 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -23,6 +23,6 @@ size_t ft_strlen(const char *s)
 
 int main()
 {
-	printf("%lu", ft_strlen("Hello World");
+	printf("%lu", ft_strlen("Hello World"));
 	return 0;
 }
