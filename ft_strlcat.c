@@ -1,45 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 12:46:46 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/23 13:42:33 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/23 13:44:06 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/23 14:29:06 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 
-char *ft_strcat(char *s1, const char *s2)
+size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t i;
-	size_t b;
-	
+	char *dest = (char *)dst;
+	const char *source = (const char *)src;
+
 	i = 0;
-	b = 0;
-	while(s1[i])
+	while(dest[i])
+		i++;
+	while(i < n)
 	{
+		dest[i] = source[i];
 		i++;
 	}
-	while(s2[b])
-	{
-		s1[i] = s2[b];
-		b++;
-		i++;
-	}
-	s1[i] = '\0';
-	return s1;
+	dest[i] = '\0';
+	return ((sizeof(source)-;
 }
 
 int main()
 {
-	char *c = "Hello";
-	char *b = "World";
+	char c[20] = "hello World";
+	char b[] = "Hello World  ";
 
-	//printf("%s", ft_strcat(c,b));
-	printf("%s", strcat(c,b));
-	return 0;
+	printf("%lu", strlcpy(c, b, 30));
 }

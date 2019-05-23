@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:49:08 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/22 16:31:28 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/23 13:34:59 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,24 @@
 int ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t i;
-	size_t c;
-	int h;
-	int j;
-	int *a = (int*)s1;
-	int *b = (int*)s2;
-	h = 0;
-	j = 0;
+	unsigned char *str1 = (unsigned char *)s1;
+	unsigned char *str2 = (unsigned char *)s2;
 	i = 0;
-	c = 0;
-	while(i < n)
-	{
-		j = j + a[i];
-		h = h + b[c];
-		i++;
-		c++;
-	}
-
-	printf("%d\n", h);
-	printf("%d\n", j);
-
-	if(j == h)
+	if(n == 0)
 		return 0;
-	else if(j > h)
-		return 1;
-	else
-		return -1;
+		while(i < n)
+		{
+			if(str1[i] != str2[i])
+				return (str1[i] - str2[i]);
+			i++;
+		}
+		return 0;
 }
 
 int main()
 {
-	char a[12] = "Hello World";
-	char b[12] = "Hello World";
+	char *a = "Hello World1";
+	char *b = "Hello World2";
 
 	printf("%d\n",memcmp(a, b, 12));
 	printf("%d\n", ft_memcmp(a, b, 12));
