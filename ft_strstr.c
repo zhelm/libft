@@ -20,6 +20,7 @@ char *ft_strstr(const char *haystack, const char *needle)
 			}
 			if(strn[a] == '\0')
 				return &strh[i];
+}
 			else
 				a = 0;
 		}

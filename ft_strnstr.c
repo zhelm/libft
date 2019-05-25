@@ -1,38 +1,44 @@
+#include <string.h>
 #include <stdio.h>
-#include <bsd/string.h>
 
 char *ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t i;
 	size_t a;
+	size_t b;
+	size_t c;
 	char *strh = (char *)haystack;
-	char *strn = (char *)needle;
+	unsigned char *strn = (unsigned char *)needle;
 
 	i = 0;
 	a = 0;
-
-	if(strn == NULL)
-		return strh;
-	while(i != len && strh[i])
+	b = 0;
+	c = 0;
+	if(strlen(strn) != 0)
 	{
-		if(strh[i] == strn[a])
+		while(*(strh + i) && i  + a < len)
 		{
-			while((strh[i + a] == strn[a]) && strn[a])
-				a++;
-			if(strn[a] == '\0')
+			if(*(strh + i) == *(strn + a))
+			{
+				a = 0;
+				while(*(strh + a + i) == *(strn + a))
+					a++;
+			}
+			else if(*(strn + a) == '\0')
 				return &strh[i];
-			a = 0;
+			i++;
 		}
-		i++;
+		return NULL;
 	}
-	return NULL;
+	printf("Problem is here at NULL strn");
+	return strh;
 }
 
 int main()
 {
-	char *c = "Hello world its me how are you doing?";
-
-	printf("%p\n", ft_strnstr(c, "are", 40));
-//	printf("%p\n", strnstr(c, "are", 20));
+	char *c = "Hello WORLD it is me ITHINK Code";
+	printf("%s\n", ft_strnstr(c, "its", 20));
+	//	printf("%p\n", strstr(c, "isi"));
 	return 0;
 }
+
