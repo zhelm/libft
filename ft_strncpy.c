@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "libft.h"
 
 char *ft_strncpy(char *dst, const char *src, size_t len)
 {
@@ -30,12 +29,4 @@ char *ft_strncpy(char *dst, const char *src, size_t len)
 		i++;
 	}
 	return dst;
-}
-
-int main()
-{
-	char c[] = "hello";
-	char *b = 0;
-
-	printf("%s",ft_strncpy(b, c, 4));
 }

@@ -9,17 +9,13 @@
 /*   Updated: 2019/05/22 15:27:30 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+#include "libft.h"
 
 int main()
 {
-	char c[] = "hello"; 
+	const char *c = "hello"; 
 	int i;
 	i =0;
 
-	while(c[i])
-	{
-		i++;
-	}
-	printf("%d", i);
+	printf("%ld",ft_strlen(c));
 }

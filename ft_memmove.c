@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 void *ft_memmove(void *dst, const void *src, size_t n)
 {
@@ -34,20 +33,7 @@ void *ft_memmove(void *dst, const void *src, size_t n)
 	{
 		dst1[i] = tmp[i];
 		i++;
-		
+
 	}
 	return dst;
-}
-
-int main()
-{
-	//char b[12] = "Hello World";
-	char d[12] = "Hello World";
-//	char a[100];
-	char c[100];
-	//memmove(a+1, b, strlen(b) +1);
-	ft_memmove(c+1, d, (strlen(d) + 1));
-	//printf("%s\n", a);
-	printf("%s\n", (c + 1));
-	return 0;
 }

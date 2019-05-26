@@ -1,6 +1,5 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
+
+#include "libft.h"
 
 int ft_strcmp(const char *s1, const char *s2)
 {
@@ -16,13 +15,4 @@ int ft_strcmp(const char *s1, const char *s2)
 		i++;
 	}
 	return 0;
-}
-
-int main()
-{
-	char *c = "Hello ";
-	char *b = "Hello ";
-
-	printf("%d", ft_strcmp(c, b));
-	printf("%d", strcmp(c, b));
 }

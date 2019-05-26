@@ -1,5 +1,5 @@
-#include <string.h>
-#include <stdio.h>
+
+#include "libft.h"
 
 char *ft_strstr(const char *haystack, const char *needle)
 {
@@ -26,12 +26,4 @@ char *ft_strstr(const char *haystack, const char *needle)
 		i++;
 	}
 	return NULL;
-}
-
-int main()
-{
-	char *c = "Hello WORLD it is me ITHINK Code";
-	printf("%p\n", ft_strstr(c, "is"));
-	printf("%p\n", strstr(c, "is"));
-	return 0;
 }

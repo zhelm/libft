@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 int ft_memcmp(const void *s1, const void *s2, size_t n)
 {
@@ -21,21 +20,11 @@ int ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	if(n == 0)
 		return 0;
-		while(i < n)
-		{
-			if(str1[i] != str2[i])
-				return (str1[i] - str2[i]);
-			i++;
-		}
-		return 0;
-}
-
-int main()
-{
-	char *a = "Hello World1";
-	char *b = "Hello World2";
-
-	printf("%d\n",memcmp(a, b, 12));
-	printf("%d\n", ft_memcmp(a, b, 12));
+	while(i < n)
+	{
+		if(str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
+	}
 	return 0;
 }

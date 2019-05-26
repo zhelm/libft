@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
 void *ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
@@ -32,17 +31,4 @@ void *ft_memccpy(void *dst, const void *src, int c, size_t n)
 		i++;
 	}
 	return NULL;
-}
-
-int main()
-{
-	char d[12] = "Hello World";
-	char b[12] = "Hello Wolrd";
-	char c[12];
-	char a[12];
-
-	 memccpy(c, d, 'e', 12);
-	ft_memccpy(a, b, 'e', 12);
-	printf("%s|\n", c);
-	printf("%s|\n", a);
 }

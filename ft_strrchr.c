@@ -17,10 +17,3 @@ char *ft_strrchr(const char *s, int c)
 	else
 		return NULL;
 }
-
-int main()
-{
-	char *a = "ahello Friday";
-	printf("%p\n", ft_strrchr(a, 'F'));
-	printf("%p\n", strrchr(a, 'F'));
-}

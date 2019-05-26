@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 int ft_tolower(int c)
 {
 	if(c >= 65 && c <= 90)
@@ -21,10 +19,4 @@ int ft_tolower(int c)
 	}
 	else
 		return c;
-}
-
-int main()
-{
-	printf("%c", ft_tolower('b'));
-	return 0;
 }

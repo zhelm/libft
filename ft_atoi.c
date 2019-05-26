@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
 int ft_atoi(const char *str)
 {
 	int i;
@@ -44,11 +41,4 @@ int ft_atoi(const char *str)
 	}
 	return(r * s);
 
-}
-
-int main()
-{
-	char c[] = "-12 34B4323";
-	printf("%i", ft_atoi(c));
-	return 0;
 }
