@@ -20,10 +20,9 @@ char *ft_strstr(const char *haystack, const char *needle)
 			}
 			if(strn[a] == '\0')
 				return &strh[i];
-}
-			else
-				a = 0;
 		}
+		else
+			a = 0;
 		i++;
 	}
 	return NULL;
@@ -32,7 +31,7 @@ char *ft_strstr(const char *haystack, const char *needle)
 int main()
 {
 	char *c = "Hello WORLD it is me ITHINK Code";
-	printf("%p\n", ft_strstr(c, "isi"));
-	printf("%p\n", strstr(c, "isi"));
+	printf("%p\n", ft_strstr(c, "is"));
+	printf("%p\n", strstr(c, "is"));
 	return 0;
 }

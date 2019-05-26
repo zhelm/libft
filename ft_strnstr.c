@@ -5,40 +5,34 @@ char *ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t i;
 	size_t a;
-	size_t b;
-	size_t c;
 	char *strh = (char *)haystack;
-	unsigned char *strn = (unsigned char *)needle;
+	char *strn = (char *)needle;
 
 	i = 0;
 	a = 0;
-	b = 0;
-	c = 0;
-	if(strlen(strn) != 0)
+	while(strh[i])
 	{
-		while(*(strh + i) && i  + a < len)
+		if(strh[i] == strn[a])
 		{
-			if(*(strh + i) == *(strn + a))
+			while(strh[a + i] == strn[a] && strn[a] && a + i < len)
 			{
-				a = 0;
-				while(*(strh + a + i) == *(strn + a))
-					a++;
+				a++;
 			}
-			else if(*(strn + a) == '\0')
+			if(strn[a] == '\0')
 				return &strh[i];
-			i++;
 		}
+		else
+			a = 0;
+		i++;
+	}
 		return NULL;
 	}
-	printf("Problem is here at NULL strn");
-	return strh;
-}
 
-int main()
-{
-	char *c = "Hello WORLD it is me ITHINK Code";
-	printf("%s\n", ft_strnstr(c, "its", 20));
-	//	printf("%p\n", strstr(c, "isi"));
-	return 0;
-}
+	int main()
+	{
+		char *c = "Hello WORLD it is me ITHINK Code";
+		printf("%p\n", ft_strnstr(c, "is", 5));
+		//	printf("%p\n", strstr(c, "isi"));
+		return 0;
+	}
 
