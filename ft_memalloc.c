@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 15:25:36 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/27 07:15:10 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/27 07:48:05 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/27 15:22:24 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int main()
+void *ft_memalloc(size_t size)
 {
-	const char *c = "hello"; 
-	int i;
-	i =0;
+	void *ptr;
 
-	printf("%ld",ft_strlen(c));
+	if(size <= 0)
+		return NULL;
+	ptr = (void*)malloc(size);
+	ft_memset(ptr, 0, size);
+	return ptr;
 }

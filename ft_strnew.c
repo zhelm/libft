@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 15:25:36 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/27 07:15:10 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/27 11:51:58 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/27 13:50:41 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int main()
+char *ft_strnew(size_t size)
 {
-	const char *c = "hello"; 
-	int i;
-	i =0;
-
-	printf("%ld",ft_strlen(c));
+	char *a;
+	a = NULL;
+	if(size <= 0)
+		return NULL;
+	a =	malloc(sizeof(char) * (size + 1));
+	if(a == NULL)
+		return NULL;
+	return (ft_memset(a, '\0', size));
 }

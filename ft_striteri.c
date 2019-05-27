@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 15:25:36 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/27 07:15:10 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/27 14:53:39 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/27 15:37:28 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
+
+void oneup(unsigned int g, char *s)
+{
+	*s = *s + g;
+}
+
+void ft_striteri(char *s, void (*f)(unsigned int, char *))
+{
+	unsigned int a;
+
+	a = 0;
+	while(s[a])
+	{
+		f(a, &s[a]);
+		a++;
+	}
+}
 
 int main()
 {
-	const char *c = "hello"; 
-	int i;
-	i =0;
+	char c[12] = "Hello World";
 
-	printf("%ld",ft_strlen(c));
+	ft_striteri(c, oneup);
+	printf("%s", c);
 }

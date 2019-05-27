@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 11:34:46 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/23 13:08:07 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/27 14:50:11 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,10 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+void *ft_memalloc(size_t size);
+void ft_memdel(void **ap);
+char *ft_strnew(size_t size);
+void ft_strdel(char **as);
+void ft_strclr(char *s);
 
 #endif

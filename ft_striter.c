@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 15:25:36 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/27 07:15:10 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/27 13:56:24 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/27 15:26:52 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int main()
+void ft_striter(char *s, void(*f)(char *))
 {
-	const char *c = "hello"; 
-	int i;
-	i =0;
-
-	printf("%ld",ft_strlen(c));
+	size_t i;
+	i = 0;
+	
+	while(s[i])
+	{
+		f(&s[i]);
+		i++;
+	}
 }
+
+int main(void)
+{
+	char c[12] = "Hello World";
+	ft_striter(c, ft_strclr);
+	printf("%s", c);

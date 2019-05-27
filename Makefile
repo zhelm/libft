@@ -6,7 +6,7 @@
 #    By: zhelm <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/23 09:14:54 by zhelm             #+#    #+#              #
-#    Updated: 2019/05/23 13:00:58 by zhelm            ###   ########.fr        #
+#    Updated: 2019/05/27 13:49:17 by zhelm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,12 @@ SRCS = ft_atoi.c\
 	ft_strcmp.c\
 	ft_strncmp.c\
 	ft_toupper.c\
-	ft_tolower.c
+	ft_tolower.c\
+	ft_memalloc.c\
+	ft_memdel.c\
+	ft_strnew.c\
+	ft_strdel.c\
+	ft_strclr.c
 
 
 OBJ = ft_atoi.o\
@@ -59,14 +64,22 @@ OBJ = ft_atoi.o\
 	ft_strdup.o\
 	ft_strcpy.o\
 	ft_strncpy.o\
-	ft_strcato.o\
+	ft_strcat.o\
 	ft_strncat.o\
 	ft_strlcat.o\
 	ft_strchr.o\
 	ft_strrchr.o\
 	ft_strstr.o\
+	ft_strnstr.o\
 	ft_strcmp.o\
-	ft_strncmp.o
+	ft_strncmp.o\
+	ft_tolower.o\
+	ft_toupper.o\
+	ft_memalloc.o\
+	ft_memdel.o\
+	ft_strnew.o\
+	ft_strdel.o\
+	ft_strclr.o
 
 all: $(NAME)
 
