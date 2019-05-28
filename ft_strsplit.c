@@ -11,36 +11,46 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
-char **ft_strsplit(char const *s, char c)
+int ft_numstr(char const *s, char c)
 {
 	size_t i;
-	size_t j;
-	size_t amount;
-	char **a;
+	size_t b;
+	size_t num;
 
+	num = 0;
+	b = 1;
 	i = 0;
-	j = 0;
-	amount = 0;
-	s = 0;
 	while(s[i])
 	{
-		if(s[i] == c)
-			i++;
-		else if(s[i] != c && s[i])
+		while(s[i] == c && s[i])
 		{
-			amount++;
+			if(b = 1)
+			{
+				b = 0;
+			}
+			i++;
+		} 
+		while(s[i] != c && s[i])
+		{
+			if(b = 0)
+			{
+				b = 1;
+				num++;
+			}
 			i++;
 		}
-		else
-			i++;
+		i++;
 	}
-	printf("%zu", amount);
-	return a;
+	return num;
+}
+char **ft_strsplit(char const *s, char c)
+{
+	printf("%d", ft_numstr(s,c));
+	return 0;
 }
 
 int main()
 {
 	char *s = "****HELO**IT*IS*FOUR**";
-	ft_strsplit(s, '*');
+	printf("%d", ft_numstr(s, '*'));
 }
