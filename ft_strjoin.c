@@ -1,22 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 11:51:58 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/28 10:26:42 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/28 11:23:08 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/28 11:48:46 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strnew(size_t size)
+char *ft_strjoin(char const *s1, char const *s2)
 {
-	char *a;
-	a =	malloc(sizeof(char) * (size + 1));
-	if(a == NULL)
+	size_t i;
+	size_t a;
+	char *n;
+
+	i = 0;
+	a = 0;
+	n = (char *)malloc(sizeof(char) * ((ft_strlen(s1) + (ft_strlen(s2))) + 1));
+	if(n == NULL)
 		return NULL;
-	return (ft_memset(a, '\0', size));
+	while(s1[i])
+	{
+		n[i] = s1[i];
+		i++;
+	}
+	while(s2[a])
+	{
+		n[i] = s2[a];
+		a++;
+		i++;
+	}
+	n[i] = '\0';
+	return n;
+}
+
+int main()
+{
+	const char *a = "Hello";
+	const char *b = " World";
+
+	printf("%s", ft_strjoin(a, b));
 }

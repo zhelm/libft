@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 11:34:46 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/27 14:50:11 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/28 13:35:35 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void ft_memdel(void **ap);
 char *ft_strnew(size_t size);
 void ft_strdel(char **as);
 void ft_strclr(char *s);
+char *ft_strsub(char const *s, unsigned int start, size_t len);
 
 #endif
