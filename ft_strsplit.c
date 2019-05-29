@@ -6,51 +6,118 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 13:55:35 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/28 14:30:28 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/29 14:24:53 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-int ft_numstr(char const *s, char c)
+size_t ft_numstr(char const *s, char c)// determines amount of strings
 {
 	size_t i;
 	size_t b;
 	size_t num;
 
 	num = 0;
-	b = 1;
 	i = 0;
 	while(s[i])
 	{
-		while(s[i] == c && s[i])
+		if(s[i] == c)
 		{
-			if(b = 1)
-			{
-				b = 0;
-			}
-			i++;
-		} 
-		while(s[i] != c && s[i])
-		{
-			if(b = 0)
-			{
-				b = 1;
-				num++;
-			}
-			i++;
+			while(s[i] == c)
+				i++;
+			b = 0;
 		}
-		i++;
+		else if(s[i] != c && b == 0)
+		{
+			num++;
+			b = 1;
+			while(s[i] != c)
+				i++;
+		}
 	}
 	return num;
 }
-char **ft_strsplit(char const *s, char c)
+size_t ft_strnumlen(char const *s, char c, size_t word)//returns length of chosen string
 {
-	printf("%d", ft_numstr(s,c));
+	size_t len;
+	size_t i;
+
+	len = 0;
+	i = 0;
+	while(s[i])
+	{
+		if(s[i] == c)
+			i++;
+		else if(s[i] != c && s[i])
+		{
+			word--;
+			if(word == 0)
+				while(s[i] != c && s[i])
+				{
+					i++;
+					len++;
+				}
+			while(s[i] != c && s[i])
+				i++;
+		}
+	}
+	return  len;
+}
+size_t ft_strstart(char const *s, char c, size_t word)
+{
+	size_t i;
+
+	i = 0;
+	while(s[i])
+	{
+		if(s[i] == c)
+			while(s[i] == c)
+				i++;
+		else if (s[i] != c)
+		{
+			word--;
+			if(word == 0)
+			{
+				return i;
+			}
+			while(s[i] != c)
+				i++;
+		}
+	}
 	return 0;
 }
-
-int main()
+char **ft_strsplit(char const *s, char c)
 {
-	char *s = "****HELO**IT*IS*FOUR**";
-	printf("%d", ft_numstr(s, '*'));
+	size_t len;
+	size_t i;
+	size_t a;
+	size_t g;
+	char **n;
+	char *p;
+
+	i = 0;
+	a = 0;
+	len = sizeof(char *) + sizeof(char *) * (ft_numstr(s, c) + 1);
+	n = (char **)malloc(len + 1);
+	while(a <= ft_numstr(s, c))
+	{
+		g = 0;
+		n[a] = (char *)malloc(sizeof(char) * ft_strnumlen(s, c, a) + 1);
+		while(g < ft_strnumlen(s, c, a))
+		{
+			n[a][g] = s[ft_strstart(s, c, a) + g];
+			g++;
+		}
+		n[a][g] = '\0';
+		a++;
+	}
+	n[a] = (char *)malloc(sizeof(char) * 1);
+	n[a][0] = '\0';
+//	printf("%s", n[4]);
+	return n;
 }
+//int main()
+//{
+//	char *s = "****HELO**ITp*IS*FOUR**";
+//	ft_strsplit(s, '*');
+//}
