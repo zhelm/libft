@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 08:31:39 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/30 14:08:43 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/30 10:50:29 by zhelm             #+#    #+#             */
+/*   Updated: 2019/05/30 11:12:33 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strnequ(char const *s1, char const *s2, size_t n)
+void ft_putnbr_fd(int n, int fd)
 {
-	return(ft_strncmp(s1, s2, n) ? 0 : 1);
+	ft_putstr_fd(ft_itoa(n), fd);
 }

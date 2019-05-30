@@ -6,40 +6,64 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:28:09 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/29 15:01:03 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/30 09:19:11 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_itoa(int n)
+static char st_modi(int n, size_t c)
 {
-	char *d;
-	size_t i;
-	int b;
+	while(c > 0)
+	{
+		n = n / 10;
+		c--;
+	}
+	if(n < 0)
+		n *= -1;
+	return ((char)(n % 10) + 48);
+}
+static size_t st_numlen(int n)
+{
 	int a;
+	size_t i;
 
 	i = 0;
-	b = 0;
 	a = n;
-	while(b - n != 0)
+	if (n == 0)
+		return 1;
+	while(a != 0)
 	{
-		b = a % 10;
-		a ; 
-		a = (a - b)/10;
+		a = a / 10;
 		i++;
-		if(a == 0)
-		{
-			printf("%zu", i);
-			break;
-		}
 	}
-	return 0;
+	if (n < 0)
+		i++;
+	return i;
 }
-int main()
+char *ft_itoa(int n)
 {
-	int a;
+	size_t c;
+	char *b;
+	size_t i;
 
-	a = 1002;
-	ft_itoa(a);
+	i = 0;
+	c = st_numlen(n) - 1;
+	if(n < 0)
+	{
+		b = ft_strnew(st_numlen(n) + 2);
+		b[i] = '-';
+		i++;
+		c = st_numlen(n) - 2;
+	}
+	else
+		b = ft_strnew(st_numlen(n) + 1);
+	while(i < st_numlen(n))
+	{
+		b[i] = st_modi(n, c);
+		c--;
+		i++;
+	}
+	b[i] = '\0';
+	return b;
 }

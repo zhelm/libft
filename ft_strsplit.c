@@ -6,12 +6,13 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 13:55:35 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/29 14:24:53 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/30 14:28:58 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-size_t ft_numstr(char const *s, char c)// determines amount of strings
+
+static size_t ft_numstr(char const *s, char c)// determines amount of strings
 {
 	size_t i;
 	size_t b;
@@ -37,7 +38,7 @@ size_t ft_numstr(char const *s, char c)// determines amount of strings
 	}
 	return num;
 }
-size_t ft_strnumlen(char const *s, char c, size_t word)//returns length of chosen string
+static size_t ft_strnumlen(char const *s, char c, size_t word)//returns length of chosen string
 {
 	size_t len;
 	size_t i;
@@ -63,7 +64,7 @@ size_t ft_strnumlen(char const *s, char c, size_t word)//returns length of chose
 	}
 	return  len;
 }
-size_t ft_strstart(char const *s, char c, size_t word)
+static size_t ft_strstart(char const *s, char c, size_t word)
 {
 	size_t i;
 
@@ -93,7 +94,6 @@ char **ft_strsplit(char const *s, char c)
 	size_t a;
 	size_t g;
 	char **n;
-	char *p;
 
 	i = 0;
 	a = 0;
@@ -113,11 +113,5 @@ char **ft_strsplit(char const *s, char c)
 	}
 	n[a] = (char *)malloc(sizeof(char) * 1);
 	n[a][0] = '\0';
-//	printf("%s", n[4]);
 	return n;
 }
-//int main()
-//{
-//	char *s = "****HELO**ITp*IS*FOUR**";
-//	ft_strsplit(s, '*');
-//}

@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 08:41:32 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/28 13:38:01 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/30 12:43:10 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,3 @@ char *ft_strsub(char const *s, unsigned int start, size_t len)
 	n[i] = '\0';
 	return n;
 }
-
-//int main()
-//{
-//	const char *c = "Hello World";
-//	printf("%s", ft_strsub(c, 2, 9));
-//}

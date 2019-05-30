@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 11:23:08 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/28 11:48:46 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/30 12:41:37 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,4 @@ char *ft_strjoin(char const *s1, char const *s2)
 	}
 	n[i] = '\0';
 	return n;
-}
-
-int main()
-{
-	const char *a = "Hello";
-	const char *b = " World";
-
-	printf("%s", ft_strjoin(a, b));
 }
