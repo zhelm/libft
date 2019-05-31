@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 07:53:13 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/31 13:52:47 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/05/31 14:06:37 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ char **ft_strsplit(char const *s, char c)
 	a = 0;
 	i = 0;
 	b = 0;
-	len = sizeof(char) + sizeof(char) * (st_countstr(s, c));
-	array = (char **)malloc(sizeof(char) * (len + 1));
+	//len = sizeof(char) + sizeof(char) * (st_countstr(s, c));
+	array = (char **)malloc(sizeof(char *) * (st_countstr(s,c) + 1));
 	while(a <= st_countstr(s, c))
 	{
 		b = 0;
-		array[a][b] = *ft_strnew(st_countstrlen(s, c, a));
+		array[a] = ft_strnew(st_countstrlen(s, c, a));
 		while(b < st_countstrlen(s, c, a))
 		{
 			array[a][b] =  s[st_strstart(s, c, a) + b];
@@ -103,13 +103,12 @@ char **ft_strsplit(char const *s, char c)
 		array[a][b] = '\0';
 		a++;
 	}
-	array[a] = (char *)malloc(sizeof(char));
-	array[a][b] = '\0';
+//	array[a] = '\0';
 	printf("%s", array[1]);
 	return array;
 }
 int main()
 {
 	const char *a = "****Hello*its**World*";
-	printf("%s", ft_strsplit(a, '*')[0]);
+	printf("%s", ft_strsplit(a, '*')[1]);
 }
