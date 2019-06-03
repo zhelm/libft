@@ -6,7 +6,7 @@
 #    By: zhelm <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/23 09:14:54 by zhelm             #+#    #+#              #
-#    Updated: 2019/05/30 11:04:58 by zhelm            ###   ########.fr        #
+#    Updated: 2019/06/03 13:17:50 by zhelm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ SRCS = ft_atoi.c\
 	ft_putchar.c\
 	ft_itoa.c\
 	ft_putchar_fd.c\
-	ft_putstr_fd.c
+	ft_putstr_fd.c\
+	ft_strsplit.c
 
 OBJ = ft_atoi.o\
 	ft_bzero.o\
@@ -90,7 +91,8 @@ OBJ = ft_atoi.o\
 	ft_putchar.o\
 	ft_itoa.o\
 	ft_putchar_fd.o\
-	ft_putstr_fd.o
+	ft_putstr_fd.o\
+	ft_strsplit.o
 
 all: $(NAME)
 

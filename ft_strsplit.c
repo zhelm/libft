@@ -1,117 +1,124 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_strsplit1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 13:55:35 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/31 11:52:53 by zhelm            ###   ########.fr       */
+/*   Created: 2019/05/31 07:53:13 by zhelm             #+#    #+#             */
+/*   Updated: 2019/06/03 15:08:42 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t ft_numstr(char const *s, char c)// determines amount of strings
+char *st_strstart(const char *s, char c, size_t n)
 {
-	size_t i;
-	size_t b;
-	size_t num;
-
-	num = 0;
-	i = 0;
-	while(s[i])
+	char *src = (char *)s;
+	while(*src)
 	{
-		if(s[i] == c)
-		{
-			while(s[i] == c)
-				i++;
-			b = 0;
-		}
-		else if(s[i] != c && b == 0)
-		{
-			num++;
-			b = 1;
-			while(s[i] != c)
-				i++;
-		}
-	}
-	return num;
-}
-static size_t ft_strnumlen(char const *s, char c, size_t word)//returns length of chosen string
-{
-	size_t len;
-	size_t i;
-
-	len = 0;
-	i = 0;
-	while(s[i])
-	{
-		if(s[i] == c)
-			i++;
-		else if(s[i] != c && s[i])
-		{
-			word--;
-			if(word == 0)
-				while(s[i] != c && s[i])
-				{
-					i++;
-					len++;
-				}
-			while(s[i] != c && s[i])
-				i++;
-		}
-	}
-	return  len;
-}
-static size_t ft_strstart(char const *s, char c, size_t word)
-{
-	size_t i;
-
-	i = 0;
-	while(s[i])
-	{
-		if(s[i] == c)
-			while(s[i] == c)
-				i++;
-		else if (s[i] != c)
-		{
-			word--;
-			if(word == 0)
-			{
-				return i;
-			}
-			while(s[i] != c)
-				i++;
-		}
+		while(*src == c)
+			src++;
+		if(*src != c && n != 0)
+			n--;
+		else if(n == 0)
+			return src;
+		while(*src != c)
+			src++;
 	}
 	return 0;
 }
+size_t st_countstrlen(char const *s, char c, size_t n)
+{
+	size_t i;
+	i = 0;
+	while(*s)
+	{
+		while(*s == c)
+			s++;
+		if(n != 0)
+		{
+			n--;
+		}
+		if (n == 0)
+		{
+			while(*s != c)
+			{
+				s++;
+				i++;
+			}
+			return i;
+		}
+		else
+			s++;
+	}
+	return 0;
+}
+size_t st_countstr(char const *s, char c)
+{
+	size_t i;
+	size_t count;
+
+	count = 0;
+	i = 0;
+	while(*s)
+	{
+		if(*s == c)
+		{
+			if(i == 1)
+				i = 0;
+		}
+		else if(*s != c)
+		{
+			if(i == 0)
+			{
+				i = 1;
+				count++;
+			}
+		}
+		s++;
+	}
+	return count;
+}
 char **ft_strsplit(char const *s, char c)
 {
-	size_t len;
+	char **array;
+	//	size_t len;
 	size_t i;
 	size_t a;
-	size_t g;
-	char **n;
+	size_t b;;
 
-	i = 0;
 	a = 0;
-	len = sizeof(char *) + sizeof(char *) * (ft_numstr(s, c) + 1);
-	n = (char **)malloc(sizeof(char) *(len + 1));
-	while(a <= ft_numstr(s, c))
+	i = 0;
+	b = 0;
+	//	len = sizeof(char) + sizeof(char) * (st_countstr(s, c));
+	array = (char **)malloc(sizeof(char *) * (st_countstr(s,c)));
+	while(a < st_countstr(s, c))
 	{
-		g = 0;
-		n[a] = (char *)malloc(sizeof(char) * ft_strnumlen(s, c, a) + 1);
-		while(g < ft_strnumlen(s, c, a))
+		b = 0;
+		array[a] =(char *)malloc(sizeof(char) * st_countstrlen(s, c, a) + 2);
+		while(*(st_strstart(s, c, a) + b) != c && *(st_strstart(s, c, a) + b))
 		{
-			n[a][g] = s[ft_strstart(s, c, a) + g];
-			g++;
+			array[a][b] = *(st_strstart(s, c, a) + b);
+			b++;
 		}
-		n[a][g] = '\0';
+		array[a][b] = '\0';
 		a++;
 	}
-	n[a] = (char *)malloc(sizeof(char) * 1);
-	n[a][0] = '\0';
-	return n;
+	array[a] = NULL;
+	//	printf("%s", array[1]);
+	return array;
 }
+//int main()
+//{
+//	char **b;
+//	size_t i;
+//	i = 0;
+//	const char *a = "******Heijhkjllo**its**World*";
+//	b = ft_strsplit(a, '*');
+//	while(b[i])
+//	{
+//		printf("%s\n", b[i]);
+//		i++;
+//	}
+//}
