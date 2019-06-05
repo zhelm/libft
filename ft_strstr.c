@@ -10,6 +10,8 @@ char *ft_strstr(const char *haystack, const char *needle)
 
 	i = 0;
 	a = 0;
+	if(*strn == '\0')
+		return &*strh;
 	while(strh[i])
 	{
 		if(strh[i] == strn[a])

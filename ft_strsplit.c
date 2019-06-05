@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit1.c                                     :+:      :+:    :+:   */
+/*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -84,12 +84,10 @@ char **ft_strsplit(char const *s, char c)
 {
 	char **array;
 	//	size_t len;
-	size_t i;
 	size_t a;
 	size_t b;;
 
 	a = 0;
-	i = 0;
 	b = 0;
 	//	len = sizeof(char) + sizeof(char) * (st_countstr(s, c));
 	array = (char **)malloc(sizeof(char *) * (st_countstr(s,c)));

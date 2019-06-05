@@ -17,23 +17,38 @@ char *ft_strtrim(char const *s)
 	size_t len;
 	size_t start;
 	size_t end;
+	char *b = (char *)s;
 
 	start = 0;
-	len = 0;
 	end = 0;
-	while(s[start] == ' ' || s[start] == '\n' || s[start] == '\t')
+	len = 0;
+	while(s[start] == ' ' && s[start] == '\n' && s[start] == '\t')
 		start++;
-	if(start == 0)
-		return (ft_strcpy(s));
-	while(s[len])
+	while(s[len + start] != ' ' && s[len + start] != '\n' && s[len + start] != '\t')
 		len++;
-	len--;
-	while(s[len] == ' ' || s[len] == '\n' || s[len] == '\t')
-	{
-		len--;
+	while(s[start + len + end] == ' ' && s[start + len + end] == '\n' && s[start + len + end] == '\t')
 		end++;
+	if(end != 0 && start != 0)
+	{
+		end = 0;
+		while(start < len)
+		{
+			b[end] = s[start];
+			start++;
+			end++;
+		}
+		*b = '\0';
+		return b;
 	}
-	if(end == 0)
-		return((ft_strcpy(s));
-	return (ft_strsub(s, start, len));
+	else
+        {
+                while(*s)
+                {
+                        b = (char *)s;
+                        b++;
+                        s++;
+                }
+                *b = '\0';
+                return b;
+        }
 }
