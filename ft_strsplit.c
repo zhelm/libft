@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 07:53:13 by zhelm             #+#    #+#             */
-/*   Updated: 2019/06/03 15:08:42 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/06 09:15:27 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,17 @@ size_t st_countstrlen(char const *s, char c, size_t n)
 		while(*s == c)
 			s++;
 		if(n != 0)
-		{
 			n--;
-		}
-		if (n == 0)
+		else if (n == 0)
 		{
-			while(*s != c)
+			while(*s != c && *s)
 			{
 				s++;
 				i++;
 			}
 			return i;
 		}
-		else
+		while(*s != c)
 			s++;
 	}
 	return 0;
@@ -63,11 +61,8 @@ size_t st_countstr(char const *s, char c)
 	i = 0;
 	while(*s)
 	{
-		if(*s == c)
-		{
-			if(i == 1)
+		if(*s == c && i == 1)
 				i = 0;
-		}
 		else if(*s != c)
 		{
 			if(i == 0)
@@ -83,14 +78,12 @@ size_t st_countstr(char const *s, char c)
 char **ft_strsplit(char const *s, char c)
 {
 	char **array;
-	//	size_t len;
 	size_t a;
 	size_t b;;
 
 	a = 0;
 	b = 0;
-	//	len = sizeof(char) + sizeof(char) * (st_countstr(s, c));
-	array = (char **)malloc(sizeof(char *) * (st_countstr(s,c)));
+	array = (char **)malloc(sizeof(char *) * (st_countstr(s,c) + 1));
 	while(a < st_countstr(s, c))
 	{
 		b = 0;
@@ -104,19 +97,5 @@ char **ft_strsplit(char const *s, char c)
 		a++;
 	}
 	array[a] = NULL;
-	//	printf("%s", array[1]);
 	return array;
 }
-//int main()
-//{
-//	char **b;
-//	size_t i;
-//	i = 0;
-//	const char *a = "******Heijhkjllo**its**World*";
-//	b = ft_strsplit(a, '*');
-//	while(b[i])
-//	{
-//		printf("%s\n", b[i]);
-//		i++;
-//	}
-//}
