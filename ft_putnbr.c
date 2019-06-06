@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 09:58:17 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/30 10:01:48 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/06 11:45:06 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,17 @@
 
 void ft_putnbr(int n)
 {
-	ft_putstr((const char *)ft_itoa(n));
+	if(n == -2147483648)
+	{
+		ft_putstr("-2147483648");
+		return ;
+	}
+	if (n < 0)
+	{
+		n *= -1;
+		ft_putchar('-');
+	}
+	if (n > 9)
+		ft_putnbr(n / 10);
+	ft_putchar(n % 10 + 48);
 }
