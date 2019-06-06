@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:30:09 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/30 14:26:04 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/06 14:41:25 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,9 @@ void *ft_memchr(const void *s, int c, size_t n)
 	while(i < n)
 	{
 		if((unsigned char)str[i] == a)
-		{
 			return ((char *)s + i);
-		}
 		else
-		{
 			i++;
-		}
 	}
 	return NULL;
 }
