@@ -6,7 +6,7 @@
 #    By: zhelm <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/23 09:14:54 by zhelm             #+#    #+#              #
-#    Updated: 2019/06/03 13:17:50 by zhelm            ###   ########.fr        #
+#    Updated: 2019/06/07 08:55:32 by zhelm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,19 @@ SRCS = ft_atoi.c\
 	ft_itoa.c\
 	ft_putchar_fd.c\
 	ft_putstr_fd.c\
-	ft_strsplit.c
+	ft_strsplit.c\
+	ft_striter.c\
+	ft_striteri.c\
+	ft_strmap.c\
+	ft_strmapi.c\
+	ft_strequ.c\
+	ft_strnequ.c\
+	ft_strjoin.c\
+	ft_strtrim.c\
+	ft_putendl.c\
+	ft_putnbr.c\
+	ft_putendl_fd.c\
+	ft_putnbr_fd.c
 
 OBJ = ft_atoi.o\
 	ft_bzero.o\
@@ -92,7 +104,19 @@ OBJ = ft_atoi.o\
 	ft_itoa.o\
 	ft_putchar_fd.o\
 	ft_putstr_fd.o\
-	ft_strsplit.o
+	ft_strsplit.o\
+	ft_striter.o\
+	ft_striteri.o\
+	ft_strmap.o\
+	ft_strmapi.o\
+	ft_strequ.o\
+	ft_strnequ.o\
+	ft_strjoin.o\
+	ft_strtrim.o\
+	ft_putendl.o\
+	ft_putnbr.o\
+	ft_putendl_fd.o\
+	ft_putnbr_fd.o
 
 all: $(NAME)
 
