@@ -17,9 +17,7 @@ char *ft_strtrim(char const *s)
 	size_t len;
 	size_t start;
 	size_t end;
-	char *b = (char *)s;
 
-	b = NULL;
 	start = 0;
 	end = 0;
 	len = 0;
@@ -35,7 +33,6 @@ char *ft_strtrim(char const *s)
 		end++;
 		len--;
 	}
-//	len = len - end;
 	if(end != 0 || start != 0)
 		return(ft_strsub(s, (unsigned int)start, len + 1));
 	return ft_strsub(s ,(unsigned int)start, len + 1);

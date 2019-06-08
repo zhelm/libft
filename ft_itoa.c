@@ -12,53 +12,56 @@
 
 #include "libft.h"
 
-size_t  st_factor(size_t i)
+char *st_tolong(char *b)
 {
-	size_t a;
-
-	a = 1;
-	while (i > 1)
+	b = (char *)malloc(sizeof(char) * 12);
+	b = "-2147483648";
+	return b;
+}
+char *st_itoamalloc(int n, char *b, size_t a)
+{
+	if(n < 0)
 	{
-		a = a *10;
-		i--;
+		b = (char *)malloc(sizeof(char) * (a + 2));
+		b[0] = '-';
+		n = n * -1;
+		a++;
 	}
-	return a;
+	else
+		b = (char *)malloc(sizeof(char) * (a + 1));
+	if(b == NULL)
+		return NULL;
+	b[a] = '\0';
+	while(n != 0)
+	{
+		a--;
+		b[a] = (unsigned char)(n % 10 + 48);
+		n = n / 10;
+	}
+	return b;
 }
 char *ft_itoa(int n)
 {
-	unsigned int a = (unsigned int)n;
+	int a;
 	size_t i;
 	char *b;
-	size_t g;
 
-	g = 0;
+	a = n;
+	b = NULL;
 	i = 0;
-	if(n < 0)
-		a = n * -1;
-	else
-		a = n;
+	if (n == -2147483648)
+		return st_tolong(b);
 	while(a != 0)
 	{
 		a = a / 10;
 		i++;
 	}
-	if(n < 0)
+	if(n == 0)
 	{
-		b = (char *)ft_strnew(i + 2);
-		b[g] = '-';
-		g++;
-		n = n * -1;
+		b = (char *)malloc(sizeof(char) * 2);
+		b[0] = n + 48;
+		b[1] = '\0';
+		return b;
 	}
-	else
-		b = (char *)ft_strnew(i + 1);
-	i = st_factor(i);
-	while(i >= 1 && (unsigned int)n/i <= 9)
-	{
-		b[g] = (char)((unsigned int)n / i) + 48;
-		n = (unsigned int)n % i;
-		i = i / 10;
-		g++;
-	}
-	b[g] = '\0';
-	return b;
+	return(st_itoamalloc(n, b, i));
 }
