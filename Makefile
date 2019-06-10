@@ -63,7 +63,8 @@ SRCS = ft_atoi.c\
 	ft_putendl.c\
 	ft_putnbr.c\
 	ft_putendl_fd.c\
-	ft_putnbr_fd.c
+	ft_putnbr_fd.c\
+	ft_lstdelone.c\
 
 OBJ = ft_atoi.o\
 	ft_bzero.o\
@@ -116,7 +117,8 @@ OBJ = ft_atoi.o\
 	ft_putendl.o\
 	ft_putnbr.o\
 	ft_putendl_fd.o\
-	ft_putnbr_fd.o
+	ft_putnbr_fd.o\
+	ft_lstdelone.o
 
 all: $(NAME)
 
