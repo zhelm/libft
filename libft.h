@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 11:34:46 by zhelm             #+#    #+#             */
-/*   Updated: 2019/06/03 13:18:09 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/11 13:02:05 by event            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_list
 	struct s_list	*next;
 }			t_list;
 
+void ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+t_list *ft_lstnew(void const *content, size_t content_size);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);

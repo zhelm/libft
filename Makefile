@@ -6,7 +6,7 @@
 #    By: zhelm <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/23 09:14:54 by zhelm             #+#    #+#              #
-#    Updated: 2019/06/07 08:55:32 by zhelm            ###   ########.fr        #
+#    Updated: 2019/06/11 13:01:13 by event            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,9 @@ SRCS = ft_atoi.c\
 	ft_putnbr.c\
 	ft_putendl_fd.c\
 	ft_putnbr_fd.c\
+	ft_lstnew.c\
 	ft_lstdelone.c\
+	ft_lstdel.c\
 
 OBJ = ft_atoi.o\
 	ft_bzero.o\
@@ -118,7 +120,9 @@ OBJ = ft_atoi.o\
 	ft_putnbr.o\
 	ft_putendl_fd.o\
 	ft_putnbr_fd.o\
-	ft_lstdelone.o
+	ft_lstnew.o\
+	ft_lstdelone.o\
+	ft_lstdel.o\
 
 all: $(NAME)
 
