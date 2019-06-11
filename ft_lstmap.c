@@ -14,5 +14,22 @@
 
 t_list *ft_lstmap(t_list *lst, t_list * (*f)(t_list *elem))
 {
+	t_list *head;
+	t_list *new;
 
+	if(!lst)
+		return NULL;
+	head = f(lst);
+	new = head;
+	while(lst->next)
+	{
+		lst = lst->next;
+		if(!(head->next = f(lst)))
+		{
+			free(head);
+			return NULL;
+		}
+		head = head->next;
+	}
+	return new;
 }

@@ -69,6 +69,7 @@ SRCS = ft_atoi.c\
 	ft_lstdel.c\
 	ft_lstadd.c\
 	ft_lstiter.c\
+	ft_lstmap.c\
 
 OBJ = ft_atoi.o\
 	ft_bzero.o\
@@ -127,6 +128,7 @@ OBJ = ft_atoi.o\
 	ft_lstdel.o\
 	ft_lstadd.o\
 	ft_lstiter.o\
+	ft_lstmap.o\
 
 all: $(NAME)
 
