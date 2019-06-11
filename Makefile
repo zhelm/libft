@@ -6,7 +6,7 @@
 #    By: zhelm <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/23 09:14:54 by zhelm             #+#    #+#              #
-#    Updated: 2019/06/11 13:01:13 by event            ###   ########.fr        #
+#    Updated: 2019/06/11 15:09:24 by zhelm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,8 @@ SRCS = ft_atoi.c\
 	ft_lstnew.c\
 	ft_lstdelone.c\
 	ft_lstdel.c\
+	ft_lstadd.c\
+	ft_lstiter.c\
 
 OBJ = ft_atoi.o\
 	ft_bzero.o\
@@ -123,6 +125,8 @@ OBJ = ft_atoi.o\
 	ft_lstnew.o\
 	ft_lstdelone.o\
 	ft_lstdel.o\
+	ft_lstadd.o\
+	ft_lstiter.o\
 
 all: $(NAME)
 

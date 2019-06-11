@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: event <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/11 12:52:43 by event             #+#    #+#             */
-/*   Updated: 2019/06/11 14:24:55 by zhelm            ###   ########.fr       */
+/*   Created: 2019/06/11 15:01:51 by zhelm             #+#    #+#             */
+/*   Updated: 2019/06/11 15:02:50 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstdel(t_list **alst, void(*del)(void *, size_t))
+t_list *ft_lstmap(t_list *lst, t_list * (*f)(t_list *elem))
 {
-	if(alst != NULL && del != NULL)
-	{
-		while (*alst)
-		{
-			del((**alst).content, (**alst).content_size);
-			free(*alst);
-			*alst = (**alst).next;
-		}
-		*alst = NULL;
-	}
+
 }
