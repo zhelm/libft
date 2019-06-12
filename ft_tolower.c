@@ -6,17 +6,17 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:37:57 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/20 13:42:40 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/12 08:08:02 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_tolower(int c)
+int		ft_tolower(int c)
 {
-	if(c >= 65 && c <= 90)
+	if (c >= 65 && c <= 90)
 	{
 		c = c + 32;
-		return c;
+		return (c);
 	}
 	else
-		return c;
+		return (c);
 }

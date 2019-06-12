@@ -6,14 +6,16 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:58:27 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/27 13:50:11 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/12 10:31:27 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_strdel(char **as)
+void	ft_strdel(char **as)
 {
+	if (as == NULL)
+		return ;
 	free(*as);
 	*as = NULL;
 }

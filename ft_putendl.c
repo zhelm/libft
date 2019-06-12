@@ -6,14 +6,16 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 09:45:10 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/30 09:54:31 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/12 10:54:30 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putendl(const char *s)
+void	ft_putendl(const char *s)
 {
+	if (!s)
+		return ;
 	ft_putstr(s);
 	ft_putchar('\n');
 }

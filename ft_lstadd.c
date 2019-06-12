@@ -6,15 +6,15 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:27:33 by zhelm             #+#    #+#             */
-/*   Updated: 2019/06/11 15:00:20 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/12 07:14:06 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstadd(t_list **alst, t_list *new)
+void	ft_lstadd(t_list **alst, t_list *new)
 {
-	if(alst)
+	if (alst)
 	{
 		new->next = *alst;
 		*alst = new;

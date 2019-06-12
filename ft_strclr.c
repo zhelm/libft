@@ -6,19 +6,19 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 13:27:57 by zhelm             #+#    #+#             */
-/*   Updated: 2019/05/27 14:51:11 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/12 10:31:20 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_strclr(char *s)
+void	ft_strclr(char *s)
 {
-	size_t i;
-	i = 0;
-	while(s[i])
+	if (!s)
+		return ;
+	while (*s)
 	{
-		s[i] = '\0';
-		i++;
+		*s = '\0';
+		s++;
 	}
 }
