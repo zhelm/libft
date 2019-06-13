@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 13:20:10 by zhelm             #+#    #+#             */
-/*   Updated: 2019/06/12 10:51:09 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/13 08:48:23 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,5 @@ char	*ft_strtrim(char const *s)
 		end++;
 		len--;
 	}
-	if (end != 0 || start != 0)
-		return (ft_strsub(s, (unsigned int)start, len + 1));
 	return (ft_strsub(s, (unsigned int)start, len + 1));
 }
