@@ -83,4 +83,5 @@ void			ft_putendl(char const *s);
 void			ft_putnbr(int n);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_lstdelone(t_list **alst, void(*del)(void *, size_t));
+int			get_nex_line(const int fd, char **line);
 #endif

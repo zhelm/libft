@@ -16,7 +16,8 @@ typedef struct	a_list
 	struct a_list	*next_line;
 }		g_line;
 
-
+int get_next_line(const int fd, char **line);
+size_t ft_strlcat(char *dst, const char *src, size_t dstsize);
 
 
 
