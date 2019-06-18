@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:15:19 by zhelm             #+#    #+#             */
-/*   Updated: 2019/06/14 08:54:58 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/18 14:14:57 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -15,6 +15,8 @@
 size_t ft_strlen(const char *c)
 {
 	size_t i;
+
+	i = 0;
 	while(c[i])
 		i++;
 	return i;
@@ -47,7 +49,7 @@ int get_next_line(const int fd, char **line)
 	static size_t l;
 	size_t d;
 	size_t i;
-	char *b1;
+	static char *b1;
 	static size_t a;
 
 	i = 0;
@@ -60,14 +62,15 @@ int get_next_line(const int fd, char **line)
 	{
 		if(a == l)
 		{
-			while(d < BUFF_SIZE)
-			{
-				if(line[0][d] == '\n')
-				d++;
-			}
 			printf("%c", line[0][i]);
-			if((line[0][i] == '\n' || line[0][i] == EOF) && (i == BUFF_SIZE - 1))
+			if(line[0][i] == '\n' || line[0][i] == EOF)
 			{
+				while(i < BUFF_SIZE)
+				{
+					*b1 = line[0][i] ;
+					i++;
+					b1++;
+				}
 				l++;
 				a++;
 				return 0;
@@ -87,8 +90,9 @@ int main()
 	size_t i;
 
 	i = 0;
-	int fd, sz;
+	int fd;
 	char **a;
+	a = NULL;
 	fd = open("text.txt", O_RDONLY);
 	//	read(fd, c, BUFF_SIZE);
 	//	c[18] = 127;
@@ -96,5 +100,5 @@ int main()
 		get_next_line(fd, a);
 		get_next_line(fd, a);
 		get_next_line(fd, a);
-		get_next_line(fd, a);
+//		get_next_line(fd, a);
 	}
