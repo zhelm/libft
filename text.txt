@@ -4,7 +4,7 @@ I need to try
 and figure out how
 to get my get_next_line working. Wouldnt that bew great huh.
 Its did not work if all of this is one the same line.
-hey
+
 also I skipped a line
 
 how about two

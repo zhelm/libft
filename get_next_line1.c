@@ -11,20 +11,43 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-char *assigner(char *, char **line, size_t l)
+static struct g_list	**list(char *llist, int fd)
+{
+	//determine how to assign different fd's to different lists and to remember them
+}
+char *assigner(size_t i, size_t count, char **line, size_t l)
 {
 
 }
-char reader(int fd, char **line, size_t l)
+char reader(int fd, size_t l, size_t count)
 {
+	size_t i;
+	char *lline;
+	i = 0;
+	lline = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	read(fd, lline, BUFF_SIZE);
 
-	read(fd, line[l], BUFF_SIZE);
+	count++;
+	while(i < BUFF_SIZE)
+	{
+		if(lline[i] == '\n')
+		{
+			printf("%lu\n", count);
+			return (0);
+		}
+		i++;
+	}
+	lline = NULL;
+	reader(fd, l, count);
 }
 int get_next_line(int fd, char **line)
 {
-	static size_t l;
+	size_t l;
+	size_t count;
 
-	line = 
+	count = 0;
+	reader(fd, l, count);
+	return 0;
 }
 int main()
 {
