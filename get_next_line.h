@@ -1,6 +1,6 @@
 #ifndef GET_NEXT_LINE_H
 #define GET_NEXT_LINE_H
-#define BUFF_SIZE 2
+#define BUFF_SIZE 10
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -10,11 +10,11 @@
 
 typedef struct	a_list
 {
-//	static int	fd;
-	int	line_num;
-	char		*line;
+	char			*line;
+	size_t			content_size;
 	struct a_list	*next_line;
-}		g_line;
+}
+				g_line;
 
 int get_next_line(const int fd, char **line);
 size_t ft_strlcat(char *dst, const char *src, size_t dstsize);
