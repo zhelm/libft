@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 10:04:46 by zhelm             #+#    #+#             */
-/*   Updated: 2019/06/20 13:30:10 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/21 09:54:31 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,30 @@ char *changer(char *lline, size_t count, size_t c)
 	ret = NULL;
 	while(lline[i] != '\n')
 		i++;
-	tmp = (char *)malloc(sizeof(char) * i);
+	tmp = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
 	while(lline[i] != '\n')
 	{
 		tmp[i] = lline[i];
 		i++;
 	}
-	ret = ft_strjoin(cut, tmp);
+	tmp[i] = '\0';
+	printf(" ret = %s\n", tmp);
+//	printf("cut = %s\n", cut);
+	if (cut != NULL)
+		ret = ft_strjoin(cut, tmp);
+	else
+		ret = tmp;
 	if((((count - 1) * BUFF_SIZE + c) - i) > 0)
 		cut = (char *)malloc(sizeof(char) * ((count - 1) * BUFF_SIZE + c));
-	if (cut == NULL)
-		return 0;
 	while(i < ((count - 1) * BUFF_SIZE + c))
 	{
 		cut[a] = lline[i];
 		a++;
 		i++;
-	} 
+	}
+   printf("cut = %s\n", cut);	
+	return ret;
 }
 char reader(int fd, size_t l, size_t count) //char *lline)
 {
@@ -65,16 +71,18 @@ char reader(int fd, size_t l, size_t count) //char *lline)
 	{
 		if(line[i] == '\n')
 		{
-			printf("%s", changer(lline, count, i));
+		//	printf("%s\n\n\n", lline);
+			printf("new %s\n", changer(lline, count, i));
+			lline = NULL;
 			//printf("%s\n\n", b1);
 			//printf("%lu\n", count);
-	//		printf("%s\n", lline);
+//			printf("%s\n", lline);
 			return (0);
 		}
 		i++;
 	}
 	free(line);
-	free(lline);
+//	free(lline);
 	reader(fd, l, count);// lline);
 	return -1;
 }
