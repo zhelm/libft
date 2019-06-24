@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 10:04:46 by zhelm             #+#    #+#             */
-/*   Updated: 2019/06/21 09:54:31 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/06/24 15:19:44 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char *changer(char *lline, size_t count, size_t c)
 		i++;
 	}
 	tmp[i] = '\0';
-	printf(" ret = %s\n", cut);
-//	printf("cut = %s\n", cut);
+	//	printf(" ret = %s\n", cut);
+	//	printf("cut = %s\n", cut);
 	if (!cut && cut != NULL)
 		ret = ft_strcpy(cut, tmp);
 	else
@@ -51,48 +51,59 @@ char *changer(char *lline, size_t count, size_t c)
 		a++;
 		i++;
 	}
-   printf("cut = %s\n", cut);
+	// printf("cut = %s\n", cut);
 	return ret;
 }
-char reader(int fd, size_t l, size_t count) //char *lline)
+
+char *st_strend(char *c)
 {
-	static char *lline;
+	char *b;
 	size_t i;
-	size_t a;
-	char *line;//something is wrong here
-	char *b1;
+
 	i = 0;
-	a = 0;
-	line = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
-	read(fd, line, BUFF_SIZE);
-	if(lline != NULL)
-        lline = ft_strjoin(lline, line);
-    else
-    {
-      //  line = (char *)malloc(sizeof(char) * BUFF_SIZE + 1);
-        lline = line;
-    }
-	count++;// count only stops after 104019 times. count Does not stop for some reason
-	printf("%sHello", lline);
-	while(i < BUFF_SIZE && count != 3)
+	b = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	while(i < BUFF_SIZE)
 	{
-		if(line[i] == '\n')
-		{
-		//	printf("%s\n\n\n", lline);
-			printf("new %s\n", changer(lline, count, i));
-			lline = NULL;
-			//printf("%s\n\n", b1);
-			//printf("%lu\n", count);
-//			printf("%s\n", lline);
-			return (0);
-		}
+		b[i] = c[i];
 		i++;
 	}
-	if (count == 3)
-        return 0;
-	free(line);
-//	free(lline);
-	reader(fd, l, count);// lline);
+	b[i] = '\0';
+	return (b);
+}
+
+char reader(int fd, size_t l, size_t count, char **lline)
+{
+	size_t i;
+	size_t loop;
+	char *cut;
+	char *line;//something is wrong here
+	char *tmp;
+
+	i = 0;
+	loop = 0;
+	lline = ft_memalloc(1);
+	line = NULL;
+	line = (char *)ft_memalloc(BUFF_SIZE);
+	while(loop == 0)
+	{
+	//	read(fd, line, BUFF_SIZE);
+	//	lline = ft_strjoin(lline, line);
+	//	printf("%s", lline);
+		i = 0;
+		read(fd, line, BUFF_SIZE);
+		tmp = ft_strjoin(*lline, line);
+		free(*lline);
+		*lline = ft_strdup(tmp);
+		while(line[i] != '\n' && i < BUFF_SIZE)
+		{
+			if(line[i] == '\n')
+				loop = 1;
+			i++;
+		}
+		free(tmp);
+	}
+	//printf("%s", cut);
+	//reader(fd, l, count, lline);// lline);
 	return -1;
 }
 int get_next_line(int fd, char **line)
@@ -101,10 +112,41 @@ int get_next_line(int fd, char **line)
 	size_t count;
 	char *lline;
 
-	lline = NULL;
 	count = 0;
-	reader(fd, l, count);// lline);
+	reader(fd, l, count, &lline);
 	return 0;
 }
+
+int main()
+{
+	int fd;
+	char **line;
+
+	fd = open("text.txt", O_RDONLY);
+	get_next_line(fd, line);
+	//	get_next_line(fd, line);
+	//	get_next_line(fd, line);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
