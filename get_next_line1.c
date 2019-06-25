@@ -1,64 +1,83 @@
 #include "get_next_line.h"
 
-char *zero_count
+size_t checklinenum(char *lline)
+{
+	size_t i;
+	char *current;
+	i = 0;
+	current = ft_strdup(lline);
+	while(*current != '\0')
+	{
+		if(*current == '\n')
+			i++;
+		current++;
+	}
+
+	//printf("%lu\n", i);
+	return (i);
+}
+
 char *changer(char *lline, size_t count, size_t i)
 {
 	char *rline;
 	static char *cut;
 	char  *cutbuf;
 	size_t a;
-	if(count != 0)
-	{
-		a = 0;
-		cutbuf = NULL;
+	a = 0;
+	cutbuf = NULL;
+	if (checklinenum(lline) == 1 || count == 0)//This part is super important i.e. super important look closely
 		cutbuf = ft_strchr(lline, '\n');
-
-		rline = ft_memalloc(ft_strlen(lline) - ft_strlen(cutbuf) + 1);
-		while (a < ft_strlen(lline) - ft_strlen(cutbuf))
-		{
-			rline[a] = lline[a];
-			a++;
-		}
-		if(cut != NULL)
-			rline = ft_strjoin(cut, rline);
-		cut = ft_strdup(cutbuf + 1);
-		printf("cut = %s\n", rline);
-	}
 	else
-		return zero_count(lline, i);
+		if(a < checklinenum(lline))
+		{
+			lline = cut;
+			cutbuf = ft_strchr(lline, '\n');
+		}
+	rline = ft_memalloc(ft_strlen(lline) - ft_strlen(cutbuf) + 1);
+	while (lline[a] != '\n')
+	{
+		rline[a] = lline[a];
+		a++;
+	}
+	if(cut != NULL)
+		rline = ft_strjoin(cut, rline);
+	cut = ft_strdup(cutbuf + 1);
+	printf("cut = %s\n", rline);
+	//find a way to use the cut part when buff is big
+	return 0;
 }
 
-char reader(int fd, size_t l, size_t count, char *lline)
+char reader(int fd, char *lline)
 {
 	size_t i;
 	size_t loop;
+	static size_t count;
 	char *line;//something is wrong here
-	char *tmp;
 
 	i = 0;
 	loop = 0;
 	lline = ft_memalloc(1);
 	line = (char *)ft_memalloc(BUFF_SIZE + 1);
-	while(loop == 0)
+	while (loop == 0)
 	{
-		read(fd, line, BUFF_SIZE);
-		if (tmp != NULL)
+		if(count == 0)
+			read(fd, line, BUFF_SIZE);
+		if (lline != NULL && count == 0)
 			lline = ft_strjoin(lline, line);
-		else
-		{
-			tmp = line;
+		else if (count == 0)
 			lline = ft_strdup(line);
-		}
-		while(lline[i])
+		while(lline[i] && count < checklinenum(lline))
 		{
 			if (lline[i] == '\n')
 			{
-				changer(lline, count, i);
+				if(loop == 0)
+					changer(lline, count, i);
+				if (checklinenum > 1)
+					count++;
 				loop = 1;
 			}
 			i++;
 		}
-		count++;
 	}
 	return -1;
 }
@@ -69,7 +88,7 @@ int get_next_line(int fd, char **line)
 	char *lline;
 
 	count = 0;
-	reader(fd, l, count, lline);
+	reader(fd, *line);
 	return 0;
 }
 
@@ -82,7 +101,7 @@ int main()
 	i = 0;
 
 	fd = open("text.txt", O_RDONLY);
-	while(i < 14)
+	while(i < 20)
 	{
 		get_next_line(fd, &a);
 		i++;

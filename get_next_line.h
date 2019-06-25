@@ -10,8 +10,11 @@
 
 typedef struct	a_list
 {
-	char			*line;
+	char			*rline;
+	char			*cut;
+	size_t			number_line;
 	size_t			content_size;
+	size_t			cut_size;
 	struct a_list	*next_line;
 }
 				g_line;
