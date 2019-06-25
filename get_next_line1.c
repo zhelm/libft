@@ -20,7 +20,7 @@ size_t checklinenum(char *lline)
 char *changer(char *lline, size_t count, size_t i)
 {
 	char *rline;
-	static char *cut;
+	static char *cut = NULL;
 	char  *cutbuf;
 	size_t a;
 	a = 0;
@@ -51,33 +51,40 @@ char reader(int fd, char *lline)
 {
 	size_t i;
 	size_t loop;
-	static size_t count;
+	static size_t count = 0;
 	char *line;//something is wrong here
+	int		ret;
 
 	i = 0;
+	ret = 1;
 	loop = 0;
 	lline = ft_memalloc(1);
 	line = (char *)ft_memalloc(BUFF_SIZE + 1);
-	while (loop == 0)
+	while (loop == 0 && ret != 0)
 	{
 		if(count == 0)
-			read(fd, line, BUFF_SIZE);
+			ret = read(fd, line, BUFF_SIZE);
 		if (lline != NULL && count == 0)
 			lline = ft_strjoin(lline, line);
 		else if (count == 0)
 			lline = ft_strdup(line);
-		while(lline[i] && count < checklinenum(lline))
+		//printf("%lu, %lu\n", count, checklinenum(lline)); 
+		while(lline[i])
 		{
 			if (lline[i] == '\n')
 			{
+				printf("\n%lu\n", checklinenum(lline));
 				if(loop == 0)
 					changer(lline, count, i);
-				if (checklinenum > 1)
+				if (checklinenum(lline) > 1)
 					count++;
-				loop = 1;
+				return 1;
+				//LOOP = 1;
 			}
+			//printf("\n-\n");
 			i++;
 		}
+		//printf("\n%s\n", lline);
 	}
 	return -1;
 }
@@ -101,7 +108,7 @@ int main()
 	i = 0;
 
 	fd = open("text.txt", O_RDONLY);
-	while(i < 20)
+	while(i < 10)
 	{
 		get_next_line(fd, &a);
 		i++;
