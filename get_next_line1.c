@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-size_t checklinenum(char *lline)
+/*size_t checklinenum(char *lline)
 {
 	size_t i;
 	char *current;
@@ -16,7 +16,6 @@ size_t checklinenum(char *lline)
 	//printf("%lu\n", i);
 	return (i);
 }
-
 char *changer(char *lline, size_t count, size_t i)
 {
 	char *rline;
@@ -27,12 +26,11 @@ char *changer(char *lline, size_t count, size_t i)
 	cutbuf = NULL;
 	if (checklinenum(lline) == 1 || count == 0)//This part is super important i.e. super important look closely
 		cutbuf = ft_strchr(lline, '\n');
-	else
-		if(a < checklinenum(lline))
-		{
-			lline = cut;
-			cutbuf = ft_strchr(lline, '\n');
-		}
+else if(a < checklinenum(lline))
+			{
+				lline = cut;
+				cutbuf = ft_strchr(lline, '\n');
+			}
 	rline = ft_memalloc(ft_strlen(lline) - ft_strlen(cutbuf) + 1);
 	while (lline[a] != '\n')
 	{
@@ -43,16 +41,14 @@ char *changer(char *lline, size_t count, size_t i)
 		rline = ft_strjoin(cut, rline);
 	cut = ft_strdup(cutbuf + 1);
 	printf("cut = %s\n", rline);
-	//find a way to use the cut part when buff is big
-	return 0;
-}
+	//find a way to use the cut part when buff 
 
-char reader(int fd, char *lline)
+ char reader(int fd, char *lline)
 {
 	size_t i;
 	size_t loop;
 	static size_t count = 0;
-	char *line;//something is wrong here
+	char *line;
 	int		ret;
 
 	i = 0;
@@ -69,12 +65,11 @@ char reader(int fd, char *lline)
 		else if (count == 0)
 			lline = ft_strdup(line);
 		//printf("%lu, %lu\n", count, checklinenum(lline)); 
-		while(lline[i])
+		while(lline[i] || count < checklinenum(lline))
 		{
-			if (lline[i] == '\n')
+			if (lline[i] == '\n' || count != 0)
 			{
 				printf("\n%lu\n", checklinenum(lline));
-				if(loop == 0)
 					changer(lline, count, i);
 				if (checklinenum(lline) > 1)
 					count++;
@@ -87,18 +82,106 @@ char reader(int fd, char *lline)
 		//printf("\n%s\n", lline);
 	}
 	return -1;
+}*/
+char *st_linereader(fd)
+{
+	return 0;
 }
+char *st_cutter(int fd, char *line)
+{
+	static t_list *head;
+	char *content;
+	char *rline;
+	char *tmp1;
+	int loop;
+	size_t i;
+	t_list *tmp;
+
+	content = NULL;
+	if(head == NULL)
+		head = ft_lstnew(content, (BUFF_SIZE + 1));
+	tmp = head;
+	//head->next;
+	//ft_lstadd(head, ft_lstnew(line, b))
+	loop = 0;
+	i = 0;
+	while(tmp->next != NULL && tmp->content_size != fd)//goes through the loop to find fd
+		tmp = tmp->next;
+	if (tmp->content_size == fd)
+		content = tmp->content;
+	else
+	{
+		ft_lstadd(&head, ft_lstnew(content, (BUFF_SIZE + 1)));
+		tmp->content_size = fd;
+	}
+	if(tmp->content == NULL)
+	{
+		line = (char *)ft_memalloc(BUFF_SIZE + 1);
+		content = ft_memalloc(1);
+		while (loop == 0)
+		{
+			read(fd, line, BUFF_SIZE);
+			if(content == NULL)
+			content = ft_strdup(line);
+			else if(content != NULL)
+			content = ft_strjoin(content, line);
+			//printf("%s\n", content);
+		 	while(content[i] != '\0' && loop != 1)
+			{
+			 	if (content[i] == '\n')
+				{
+					rline = ft_memalloc(i + 1);
+					ft_memcpy(rline, content, i);
+					printf("%s\n\n\n\n\n", rline);
+					loop = 1;
+					//printf("%s\n", rline);					
+				}
+				
+				i++;
+			}
+			//line = NULL;
+		 }
+			//printf("%s", content);
+			tmp1 = ft_strdup(ft_strchr(content, '\n') + 1);
+			//printf("\n%s\n", tmp1);
+			free (content);
+			if (tmp1)
+				tmp->content = tmp1;
+				//printf("%s", tmp->content);
+		//	content = NULL;
+	}
+	else if (tmp->content != NULL)
+	{
+		printf("%s", tmp->content);		
+	}
+	//else
+	//{
+	//	printf("%s", tmp->content);
+	//}
+	
+	return 0;
+}		
+	/* char *content;
+	size_t content_size;
+	int loop;
+
+	loop = 0;
+	while(loop == 0)
+	{
+		loop = 1;		
+	}
+
+	head = ft_lstnew(content, fd);
+}*/
 int get_next_line(int fd, char **line)
 {
 	size_t l;
 	size_t count;
 	char *lline;
-
+	st_cutter(fd, lline);
 	count = 0;
-	reader(fd, *line);
 	return 0;
 }
-
 int main()
 {
 	char *a;
@@ -108,7 +191,7 @@ int main()
 	i = 0;
 
 	fd = open("text.txt", O_RDONLY);
-	while(i < 10)
+	while(i < 2)
 	{
 		get_next_line(fd, &a);
 		i++;
