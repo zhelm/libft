@@ -83,10 +83,33 @@ else if(a < checklinenum(lline))
 	}
 	return -1;
 }*/
-char *st_linereader(fd)
+char *st_linereader(int fd, char *line, char *content, char *rline)
 {
-	return 0;
+	size_t i;
+	int loop;
+
+	i = 0;
+	loop = 0;
+	line = (char *)ft_memalloc(BUFF_SIZE + 1);
+	content = ft_memalloc(1);
+	while (loop == 0)
+	{
+		read(fd, line, BUFF_SIZE);
+		if(content == NULL)
+			content = ft_strdup(line);
+		else if(content != NULL)
+			content = ft_strjoin(content, line);
+		//printf("%s\n", content);
+		while(content[i] != '\0' && loop != 1)
+		{
+		 	if (content[i] == '\n')
+				loop = 1;					
+			i++;
+		}
+	}
+	return (content);
 }
+			
 char *st_cutter(int fd, char *line)
 {
 	static t_list *head;
@@ -116,42 +139,42 @@ char *st_cutter(int fd, char *line)
 	}
 	if(tmp->content == NULL)
 	{
-		line = (char *)ft_memalloc(BUFF_SIZE + 1);
-		content = ft_memalloc(1);
-		while (loop == 0)
-		{
-			read(fd, line, BUFF_SIZE);
-			if(content == NULL)
-			content = ft_strdup(line);
-			else if(content != NULL)
-			content = ft_strjoin(content, line);
-			//printf("%s\n", content);
-		 	while(content[i] != '\0' && loop != 1)
-			{
-			 	if (content[i] == '\n')
-				{
-					rline = ft_memalloc(i + 1);
-					ft_memcpy(rline, content, i);
-					printf("%s\n\n\n\n\n", rline);
-					loop = 1;
-					//printf("%s\n", rline);					
-				}// ft_strjoin the content to rline if tmp->content != NULL;
-				i++;
-			}
-			//line = NULL;
-		 }
-			//printf("%s", content);
-			tmp1 = ft_strdup(ft_strchr(content, '\n') + 1);
-			//printf("\n%s\n", tmp1);
-			free (content);
-			if (tmp1)
-				tmp->content = tmp1;
-				//printf("%s", tmp->content);
-		//	content = NULL;
+		content = ft_strdup(st_linereader(fd, line, content, rline));
+		rline = ft_memalloc(i + 1);
+		while (content[i] != '\n')
+			i++;
+		rline = ft_memcpy(rline, content, i);
+		printf("\n1\n%s\n", rline);
+		tmp1 = ft_strdup(ft_strchr(content, '\n') + 1);
+		free (content);
+		if (tmp1)
+			tmp->content = tmp1;
+		return 0;
+
 	}
 	else if (tmp->content != NULL)
 	{
-		printf("%s", tmp->content);		
+		i = 0;
+		while (content[i])
+		{
+			if (content[i] == '\n')
+			{
+				rline = ft_memalloc(i + 1);
+				rline = ft_memcpy(rline, content, i);
+				printf("\n2\n%s\n", rline);
+				free(tmp->content);
+				tmp->content = NULL;
+				tmp->content = ft_strdup(ft_strchr(content, '\n'));
+				free(content);
+				content = NULL;
+				return (rline);
+			}
+			i++;
+		}
+		rline = ft_strjoin(content, st_linereader(fd, line, content, rline));
+		tmp->content = NULL;
+		//free(tmp->content);
+		printf("\n3\n%s\n", rline);		
 	}
 	//else
 	//{
@@ -190,7 +213,7 @@ int main()
 	i = 0;
 
 	fd = open("text.txt", O_RDONLY);
-	while(i < 2)
+	while(i < 3)
 	{
 		get_next_line(fd, &a);
 		i++;
