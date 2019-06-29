@@ -135,8 +135,7 @@ char *st_cutter(int fd, char *line)
 					printf("%s\n\n\n\n\n", rline);
 					loop = 1;
 					//printf("%s\n", rline);					
-				}
-				
+				}// ft_strjoin the content to rline if tmp->content != NULL;
 				i++;
 			}
 			//line = NULL;
