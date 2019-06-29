@@ -140,17 +140,18 @@ char *st_cutter(int fd, char *line)
 	if(tmp->content == NULL)
 	{
 		content = ft_strdup(st_linereader(fd, line, content, rline));
-		rline = ft_memalloc(i + 1);
 		while (content[i] != '\n')
 			i++;
+		rline = ft_memalloc(i + 1);
 		rline = ft_memcpy(rline, content, i);
 		printf("\n1\n%s\n", rline);
-		tmp1 = ft_strdup(ft_strchr(content, '\n') + 1);
+		if (*(tmp1 = ft_strdup(ft_strchr(content, '\n') + 1)) == '\n')
+			return 0;
 		free (content);
 		if (tmp1)
 			tmp->content = tmp1;
+		//printf("%s\n", tmp1);
 		return 0;
-
 	}
 	else if (tmp->content != NULL)
 	{
@@ -165,12 +166,13 @@ char *st_cutter(int fd, char *line)
 				free(tmp->content);
 				tmp->content = NULL;
 				tmp->content = ft_strdup(ft_strchr(content, '\n'));
-				free(content);
-				content = NULL;
+				//free(content);
+				//content = NULL;
 				return (rline);
 			}
 			i++;
 		}
+		//printf("%s", st_linereader(fd, line, content, rline));
 		rline = ft_strjoin(content, st_linereader(fd, line, content, rline));
 		tmp->content = NULL;
 		//free(tmp->content);
@@ -213,7 +215,7 @@ int main()
 	i = 0;
 
 	fd = open("text.txt", O_RDONLY);
-	while(i < 3)
+	while(i < 4)
 	{
 		get_next_line(fd, &a);
 		i++;
