@@ -144,9 +144,9 @@ char *st_cutter(int fd, char *line)
 			i++;
 		rline = ft_memalloc(i + 1);
 		rline = ft_memcpy(rline, content, i);
-		printf("\n1\n%s\n", rline);
+	//	printf("\n1\n%s\n", rline);
 		if (*(tmp1 = ft_strdup(ft_strchr(content, '\n') + 1)) == '\n')
-			return 0;
+				return 0;
 		free (content);
 		if (tmp1)
 			tmp->content = tmp1;
@@ -162,7 +162,7 @@ char *st_cutter(int fd, char *line)
 			{
 				rline = ft_memalloc(i + 1);
 				rline = ft_memcpy(rline, content, i);
-				printf("\n2\n%s\n", rline);
+		//		printf("\n2\n%s\n", rline);
 				free(tmp->content);
 				tmp->content = NULL;
 				tmp->content = ft_strdup(ft_strchr(content, '\n'));
@@ -172,6 +172,7 @@ char *st_cutter(int fd, char *line)
 			}
 			i++;
 		}
+		printf("%s", content);
 		//printf("%s", st_linereader(fd, line, content, rline));
 		rline = ft_strjoin(content, st_linereader(fd, line, content, rline));
 		tmp->content = NULL;
