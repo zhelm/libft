@@ -71,7 +71,7 @@ char *st_cutter(int fd, char *line)
 			if (content[i] == '\n')
 			{
 				rline = ft_memalloc(i + 1);
-				rline = ft_memcpy(rline, content, i);
+				rline = ft_strcdup(content, '\n');
 				free(tmp->content);
 				tmp->content = ft_strdup(ft_strchr(content, '\n'));
 				printf("rline = %s|\n", rline);
