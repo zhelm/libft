@@ -80,10 +80,12 @@ char *st_cutter(int fd, char *line)
 			i++;
 		}
 		tmp1 = st_linereader(fd, line, content, rline);
-		//access current excess buffer and buffer after the read.
-		tmp->content = NULL;
-		printf("rline =%s|\n", rline);
+		while (tmp1[i])
+			i++;
+		rline = ft_strdup(ft_strjoin(content, ft_strsub(tmp1, 0, i)));
 		free(tmp->content);
+		//access current excess buffer and buffer after the read.
+		printf("rline =%s|\n", rline);
 	}
 	return 0;
 }		
