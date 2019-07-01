@@ -70,7 +70,6 @@ char *st_cutter(int fd, char *line)
 		{
 			if (content[i] == '\n')
 			{
-				rline = ft_memalloc(i + 1);
 				rline = ft_strcdup(content, '\n');
 				free(tmp->content);
 				tmp->content = ft_strdup(ft_strchr(content, '\n'));
@@ -85,7 +84,7 @@ char *st_cutter(int fd, char *line)
 		rline = ft_strdup(ft_strjoin(content, ft_strsub(tmp1, 0, i)));
 		free(tmp->content);
 		//access current excess buffer and buffer after the read.
-		printf("rline =%s|\n", rline);
+		printf("\n3rline =%s|\n", rline);
 	}
 	return 0;
 }		
