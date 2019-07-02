@@ -10,15 +10,22 @@ char *st_linereader(int fd, char *line, char *content, char *rline)
 	loop = 0;
 	tmp = NULL;
 	line = (char *)ft_memalloc(BUFF_SIZE + 1);
-	if (content == NULL)
-		content = ft_memalloc(1);
+	//if (content == NULL)
+		//content = ft_memalloc(1);
+	//printf("content before read = %s", content);
 	while (loop == 0)
 	{
+		ft_bzero(line, BUFF_SIZE);
 		read(fd, line, BUFF_SIZE);
 		if(content == NULL)
 			content = ft_strdup(line);
 		else if(content != NULL)
-			content = ft_strjoin(content, line);
+		{
+			tmp = ft_strjoin(content, line);
+			free(content);
+			content = ft_strdup(tmp);
+			free(tmp);
+		}
 		while(content[i] != '\0' && loop != 1)
 		{
 		 	if (content[i] == '\n')
@@ -27,7 +34,7 @@ char *st_linereader(int fd, char *line, char *content, char *rline)
 				i++;
 		}
 	}
-	printf("content = %s\n", content);
+	//printf("content in linereader = %s\n", content);
 return content;
 }
 			
@@ -64,15 +71,16 @@ char *st_cutter(int fd, char *line)
 			i++;
 		rline = ft_memalloc(i + 1);
 		rline = ft_memcpy(rline, content, i);
-		//printf("%s", content);
+		printf("%s", content);
 		tmp->content = ft_strdup(ft_strchr(content, '\n') + 1);
 		return 0;
 	}
-	else if (tmp->content != NULL)
+	else if (tmp->content)
 	{
 		i = 0;
+		printf("tmp->content = %s|\n", tmp->content);
 		content = ft_strdup(tmp->content);
-		//printf("%s", content);
+		printf("tmp->content = %s\n", content);
 		while (content[i])
 		{
 			if (content[i] == '\n')
@@ -85,12 +93,15 @@ char *st_cutter(int fd, char *line)
 			}
 			i++;
 		}
+		//printf("%s", content);
 		rline = ft_strdup(content);
-		free(content);
+		printf("tmp->content = %s\n", tmp->content);
 		tmp1 = st_linereader(fd, line, content, rline);
+		printf("tmp1 = %s\n", tmp1);
+		free(content);
 		rline = ft_strdup(ft_strjoin(rline, ft_strcdup(tmp1, '\n')));
 		content = ft_strdup(ft_strchr(tmp1, '\n') + 1);
-		printf("r line = %s", rline);
+		printf("r line = %s\n", rline);
 
 		//for some wierd reason I am losing 4 characters when I join them
 		//if (!(tmp->content = ft_strchr(tmp1, '\n') + 1))
@@ -115,10 +126,10 @@ int main()
 	int fd;
 	size_t i;
 
-	i = 0;
+	i = 1;
 
 	fd = open("text.txt", O_RDONLY);
-	while(i < 20)
+	while(i < 21)
 	{
 		printf ("i = %lu\n", i);
 		get_next_line(fd, &a);
