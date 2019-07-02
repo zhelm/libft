@@ -10,7 +10,8 @@ char *st_linereader(int fd, char *line, char *content, char *rline)
 	loop = 0;
 	tmp = NULL;
 	line = (char *)ft_memalloc(BUFF_SIZE + 1);
-	content = ft_memalloc(1);
+	if (content == NULL)
+		content = ft_memalloc(1);
 	while (loop == 0)
 	{
 		read(fd, line, BUFF_SIZE);
@@ -26,6 +27,7 @@ char *st_linereader(int fd, char *line, char *content, char *rline)
 				i++;
 		}
 	}
+	printf("content = %s\n", content);
 return content;
 }
 			
@@ -46,7 +48,10 @@ char *st_cutter(int fd, char *line)
 	while(tmp->next != NULL && tmp->content_size != fd)//goes through the loop to find fd
 		tmp = tmp->next;
 	if (tmp->content_size == fd && tmp->content != NULL)
+	{
 		content = ft_strdup(tmp->content);
+	//	printf("%s",content);
+	}
 	else
 	{
 		ft_lstadd(&head, ft_lstnew(content, (BUFF_SIZE + 1)));
@@ -59,32 +64,39 @@ char *st_cutter(int fd, char *line)
 			i++;
 		rline = ft_memalloc(i + 1);
 		rline = ft_memcpy(rline, content, i);
-		printf("%s", content);
+		//printf("%s", content);
 		tmp->content = ft_strdup(ft_strchr(content, '\n') + 1);
 		return 0;
 	}
 	else if (tmp->content != NULL)
 	{
 		i = 0;
+		content = ft_strdup(tmp->content);
+		//printf("%s", content);
 		while (content[i])
 		{
 			if (content[i] == '\n')
 			{
 				rline = ft_strcdup(content, '\n');
 				free(tmp->content);
-				tmp->content = ft_strdup(ft_strchr(content, '\n'));
-				printf("rline = %s|\n", rline);
+				tmp->content = ft_strdup(ft_strchr(content, '\n') + 1);
+				//printf("rline = %s|", rline);
 				return (0);
 			}
 			i++;
 		}
+		rline = ft_strdup(content);
+		free(content);
 		tmp1 = st_linereader(fd, line, content, rline);
-		while (tmp1[i])
-			i++;
-		rline = ft_strdup(ft_strjoin(content, ft_strsub(tmp1, 0, i)));
-		free(tmp->content);
+		rline = ft_strdup(ft_strjoin(rline, ft_strcdup(tmp1, '\n')));
+		content = ft_strdup(ft_strchr(tmp1, '\n') + 1);
+		printf("r line = %s", rline);
+
+		//for some wierd reason I am losing 4 characters when I join them
+		//if (!(tmp->content = ft_strchr(tmp1, '\n') + 1))
+			//free(tmp->content);
 		//access current excess buffer and buffer after the read.
-		printf("\n3rline =%s|\n", rline);
+		//printf("\n3rline =%s|\n", rline);
 	}
 	return 0;
 }		
