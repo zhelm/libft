@@ -96,9 +96,10 @@ char *st_cutter(int fd, char *line)
 		//printf("%s", content);
 		rline = ft_strdup(content);
 		printf("tmp->content = %s\n", tmp->content);
-		tmp1 = st_linereader(fd, line, content, rline);
+		tmp1 = ft_strdup(st_linereader(fd, line, content, rline));
 		printf("tmp1 = %s\n", tmp1);
 		free(content);
+		content = NULL;
 		rline = ft_strdup(ft_strjoin(rline, ft_strcdup(tmp1, '\n')));
 		content = ft_strdup(ft_strchr(tmp1, '\n') + 1);
 		printf("r line = %s\n", rline);
@@ -128,11 +129,12 @@ int main()
 
 	i = 1;
 
-	fd = open("text.txt", O_RDONLY);
-	while(i < 21)
+	fd = open("test2.txt", O_RDONLY);
+	while(i < 1)
 	{
 		printf ("i = %lu\n", i);
 		get_next_line(fd, &a);
 		i++;
 	}
+	sleep (30);
 }
