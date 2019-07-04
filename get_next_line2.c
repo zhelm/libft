@@ -11,14 +11,12 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-void  ft_linecutter(char **content, char **line)
+void  ft_linecutter(char *content, char **line)
 {
     char *cut;
 
-    if (ft_strchr(*content, '\n'))
-    {
-        *line = ft_strcdup(*content, '\n');
-    }
+    if (ft_strchr(content, '\n'))
+        *line = ft_strcdup(content, '\n');
 
 }
 
@@ -56,7 +54,7 @@ int get_next_line(int fd, char **line)
     char *content;
     char *tmp;
     char *tmp1;
-//mem leak
+
     content = NULL;
 	if(head == NULL)
 		head = ft_lstnew(content, (BUFF_SIZE + 1));
@@ -71,28 +69,20 @@ int get_next_line(int fd, char **line)
 		ptr->content_size = fd;
 	}
     buff = ft_memalloc(BUFF_SIZE + 1);
-    if (ptr->content == NULL)
-        content = ft_linereader(fd, buff);
+    if (content == NULL)
+        content = ft_strdup(ft_linereader(fd, buff));
     else
     {
         tmp = ft_linereader(fd, buff);
-        tmp1 = ft_strdup(content);
+        tmp1 = ft_strdup(ptr->content);
         free(content);
         content = ft_strjoin(tmp1, tmp);
+       // printf("asdasd%s\n", content);
         free(tmp);
         free(tmp1);
     }
-    ft_linecutter(&content, line);
-   // if (!(ft_strchr(content, '\n') == content))//if the pointer of the first char of content = to a \n then do the action
-        //*line = ft_strcdup(content, '\n');
-    //else //----------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> MAKE A CUTTING STATEMENT HERE
-      //  *line = ft_strnew(1);
-//    tmp1 = ft_strdup(ft_strchr(content, '\n') + 1);//still using pointers that point to the same addr
-  //  free(ptr->content);
-    //content = ft_strdup(tmp1);
-    //free(tmp1);
-   // printf("%s", ptr->content);
-    //I think I need a cheacker to tell me if it is EOF <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-----------------------this one
+    ptr->content = ft_strdup(ft_strchr(content, '\n') + 1);
+    ft_linecutter(content, line);
     return 0;
 }
 /* The plan is :
