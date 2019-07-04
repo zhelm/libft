@@ -24,7 +24,7 @@ char	*ft_strcdup(const char *s1, int c)
         {
             if(s1[i] == c)
             {
-                str = ft_memalloc(i);
+                str = ft_strnew(i);
                 i = 0;
                 while(s1[i] != c)
                 {

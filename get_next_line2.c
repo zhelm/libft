@@ -11,8 +11,14 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-char  *ft_linecutter(char *element)
+void  ft_linecutter(char **content, char **line)
 {
+    char *cut;
+
+    if (ft_strchr(*content, '\n'))
+    {
+        *line = ft_strcdup(*content, '\n');
+    }
 
 }
 
@@ -39,6 +45,7 @@ char *ft_linereader(int fd, char *buff)
         if (ft_strchr(rline, '\n') != NULL)
             return rline;
     }
+    return rline;
 }
 
 int get_next_line(int fd, char **line)
@@ -48,7 +55,8 @@ int get_next_line(int fd, char **line)
     char *buff;
     char *content;
     char *tmp;
-
+    char *tmp1;
+//mem leak
     content = NULL;
 	if(head == NULL)
 		head = ft_lstnew(content, (BUFF_SIZE + 1));
@@ -56,37 +64,43 @@ int get_next_line(int fd, char **line)
 	while(ptr->next != NULL && ptr->content_size != fd)
 		ptr = ptr->next;
 	if (ptr->content_size == fd && ptr->content != NULL)
-		content = ft_strdup(ptr->content);
+		content = ptr->content;
 	else
 	{
-		ft_lstadd(&head, ft_lstnew(content, (BUFF_SIZE + 1)));
+		ft_lstadd(&head, ft_lstnew(NULL, (BUFF_SIZE + 1)));
 		ptr->content_size = fd;
 	}
     buff = ft_memalloc(BUFF_SIZE + 1);
-    if(content == NULL)
+    if (ptr->content == NULL)
         content = ft_linereader(fd, buff);
     else
     {
-        free(content);
         tmp = ft_linereader(fd, buff);
-        content = ft_strjoin(ptr->content, tmp);
+        tmp1 = ft_strdup(content);
+        free(content);
+        content = ft_strjoin(tmp1, tmp);
         free(tmp);
-        free(ptr->content);
+        free(tmp1);
     }
-    if (!(content[0] == '\n'))
-        *line = ft_strcdup(content, '\n');
-    else 
-        *line = ft_strnew(1);
-    ptr->content = ft_strdup(ft_strchr(content, '\n') + 1);
+    ft_linecutter(&content, line);
+   // if (!(ft_strchr(content, '\n') == content))//if the pointer of the first char of content = to a \n then do the action
+        //*line = ft_strcdup(content, '\n');
+    //else //----------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> MAKE A CUTTING STATEMENT HERE
+      //  *line = ft_strnew(1);
+//    tmp1 = ft_strdup(ft_strchr(content, '\n') + 1);//still using pointers that point to the same addr
+  //  free(ptr->content);
+    //content = ft_strdup(tmp1);
+    //free(tmp1);
    // printf("%s", ptr->content);
-    //I think I need a cheacker to tell me if it is EOF 
+    //I think I need a cheacker to tell me if it is EOF <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-----------------------this one
     return 0;
 }
 /* The plan is :
     read until new line;
     if no new line is found when read == 0 return the line without new line
     else if a new line is found save excess and return line;
-    if new line not found in excess read till it finds new line*/
+    if new line not found in excess read till it finds new line
+ */
 
 int     main()
 {
@@ -99,8 +113,10 @@ int     main()
     while (i < 21)
     {
         i++;
-        printf("%lu\n", i);
+        printf("\n%lu\n", i);
         get_next_line(fd, &line);
-        printf("%s\n", line);
+        printf("%s", line);
+        free(line);
     }
+    sleep (30);
 }
