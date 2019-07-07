@@ -19,6 +19,7 @@ int     ft_cutter(int rd, char **econtent, char **line)
     {
         //join is not proper
         *line = ft_strcdup(*econtent, '\n');
+    
         tmp = ft_strdup(ft_strchr(*econtent, '\n') + 1);
         free(*econtent);
         *econtent = ft_strdup(tmp);
@@ -59,9 +60,8 @@ int ft_reader(int fd, char **econtent, char **line)
         free(buff);
     if((ft_strlen(*econtent) != 0 && ft_strchr(*econtent, '\n')) || (ft_strlen(*econtent) != 0 && rd == 0))
         return(ft_cutter(rd, &*econtent, line));
-    return 0;
     }
-    return -1;
+    return 0;
 }
 
 int get_next_line(int fd, char **line)
@@ -85,6 +85,7 @@ int get_next_line(int fd, char **line)
 		ft_lstadd(&head, ft_lstnew(NULL, (BUFF_SIZE + 1)));
 		ptr->content_size = fd;
 	}
+   
     return (ft_reader(fd, (char **)&ptr->content, line));
 }
 
@@ -94,13 +95,14 @@ int     main()
     char *line;
     int ret;
     ret = 1;
-    fd = open("bible.txt", O_RDONLY);
-    while ((ret = get_next_line(fd, &line)) > 0)
+ 
+    fd = open("test2.txt", O_RDONLY);
+    while (get_next_line(fd, &line) > 0)
     {
         printf("ret = %d\n", ret);
         printf("%s\n", line);
-       free(line);
+        free(line);
     }
     return 0;
-    sleep (30);
+    //sleep (30);
 }
