@@ -11,102 +11,96 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-void  ft_linecutter(char *content, char **line)
+
+int     ft_cutter(int rd, char **econtent, char **line)
 {
-    char *cut;
-
-    if (ft_strchr(content, '\n'))
-        *line = ft_strcdup(content, '\n');
-
+    char *tmp;
+    if(*econtent && ft_strchr(*econtent, '\n'))
+    {
+        //join is not proper
+        *line = ft_strcdup(*econtent, '\n');
+        tmp = ft_strdup(ft_strchr(*econtent, '\n') + 1);
+        free(*econtent);
+        *econtent = ft_strdup(tmp);
+        free(tmp);
+    }
+   // printf("between");
+    else if (rd == 0)
+    {
+     //   printf("Hello I get here\n");
+        *line = ft_strdup(*econtent);
+        free(*econtent);
+    }
+    return 1;
 }
 
-char *ft_linereader(int fd, char *buff)
+int ft_reader(int fd, char **econtent, char **line)
 {
-    size_t i;
-    char *rline;
+    char *buff;
     char *tmp;
-    int ret;
+    ssize_t rd;
 
-    i = 0;
-    rline = NULL;
-    while((ret = read(fd, buff, BUFF_SIZE) > 0))
+    rd = 1;
+    while(rd > 0)
     {
-        if (rline == NULL)
-            rline = ft_strdup(buff);
-        else
+        buff = ft_memalloc(BUFF_SIZE);
+        rd = read(fd, buff, BUFF_SIZE);
+        if (*econtent == NULL && rd != 0)
+            *econtent = ft_strdup(buff);
+        else if (rd != 0)
         {
-            tmp = ft_strjoin(rline, buff);
-            free(rline);
-            rline = ft_strdup(tmp);
+          
+            tmp = ft_strjoin(*econtent, buff);
+            free(*econtent);
+            *econtent = ft_strdup(tmp);
             free(tmp);
         }
-        if (ft_strchr(rline, '\n') != NULL)
-            return rline;
+        ft_bzero(buff, BUFF_SIZE);
+        free(buff);
+    if((ft_strlen(*econtent) != 0 && ft_strchr(*econtent, '\n')) || (ft_strlen(*econtent) != 0 && rd == 0))
+        return(ft_cutter(rd, &*econtent, line));
+    return 0;
     }
-    return rline;
+    return -1;
 }
 
 int get_next_line(int fd, char **line)
 {
     static t_list *head;
     t_list *ptr;
-    char *buff;
-    char *content;
-    char *tmp;
-    char *tmp1;
+    char *econtent;
 
-    content = NULL;
+    if (!line || fd < 0 || read(fd, NULL, 0) == -1)
+        return (-1);
+    econtent = NULL;
 	if(head == NULL)
-		head = ft_lstnew(content, (BUFF_SIZE + 1));
+		head = ft_lstnew(econtent, (BUFF_SIZE + 1));
     ptr = head;
 	while(ptr->next != NULL && ptr->content_size != fd)
 		ptr = ptr->next;
 	if (ptr->content_size == fd && ptr->content != NULL)
-		content = ptr->content;
+		econtent = ptr->content;
 	else
 	{
 		ft_lstadd(&head, ft_lstnew(NULL, (BUFF_SIZE + 1)));
 		ptr->content_size = fd;
 	}
-    buff = ft_memalloc(BUFF_SIZE + 1);
-    if (content == NULL)
-        content = ft_strdup(ft_linereader(fd, buff));
-    else
-    {
-        tmp = ft_linereader(fd, buff);
-        tmp1 = ft_strdup(ptr->content);
-        free(content);
-        content = ft_strjoin(tmp1, tmp);
-       // printf("asdasd%s\n", content);
-        free(tmp);
-        free(tmp1);
-    }
-    ptr->content = ft_strdup(ft_strchr(content, '\n') + 1);
-    ft_linecutter(content, line);
-    return 0;
+    return (ft_reader(fd, (char **)&ptr->content, line));
 }
-/* The plan is :
-    read until new line;
-    if no new line is found when read == 0 return the line without new line
-    else if a new line is found save excess and return line;
-    if new line not found in excess read till it finds new line
- */
 
 int     main()
 {
     int fd;
     char *line;
-    size_t i;
-
-    i = 0;
-    fd = open("test2.txt", O_RDONLY);
-    while (i < 21)
+    int ret;
+    ret = 1;
+    fd = open("bible.txt", O_RDONLY);
+    while ((ret = get_next_line(fd, &line)) > 0)
     {
-        i++;
-        printf("\n%lu\n", i);
-        get_next_line(fd, &line);
-        printf("%s", line);
-        free(line);
+        printf("ret = %d\n", ret);
+        printf("%s\n", line);
+       free(line);
     }
+    return 0;
     sleep (30);
 }
