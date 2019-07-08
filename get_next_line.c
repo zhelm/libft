@@ -17,10 +17,9 @@ int ft_checker(char **econtent, char **line)
     char *tmp;
     *line = ft_strcdup(*econtent, '\n');
     tmp = ft_strdup(ft_strchr(*econtent, '\n') + 1);
-    // free(*econtent);
+     free(*econtent);
     *econtent = ft_strdup(tmp);
-
-    // free(tmp);
+     free(tmp);
     return 1;
 }
 
@@ -28,7 +27,7 @@ int     ft_cutter(int rd, char **econtent, char **line, char **buff)
 {
     free(*buff);
     if(*econtent && ft_strchr(*econtent, '\n'))
-     ft_checker(econtent, line);
+        ft_checker(econtent, line);
     else if (rd == 0)
     {
         *line = ft_strdup(*econtent);
@@ -52,7 +51,6 @@ int ft_reader(int fd, char **econtent, char **line)
     {
         ft_bzero(buff, BUFF_SIZE);
         rd = read(fd, buff, BUFF_SIZE);
-        buff[BUFF_SIZE + 1] = '\0';// Here it is
         if (*econtent == NULL && rd != 0)
             *econtent = ft_strdup(buff);
         else if (rd != 0)
@@ -111,12 +109,12 @@ int     main()
         i++;
         printf("%s\n", line);
        free(line);
-    
     }
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("time = %f", cpu_time_used);
     
-    return 0;
-    //sleep (30);
+  
+  //  sleep (30);
+      return 0;
 }
