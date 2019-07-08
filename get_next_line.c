@@ -15,9 +15,10 @@
 int ft_checker(char **econtent, char **line)
 {
     char *tmp;
-    *line = ft_strcdup(*econtent, '\n');
+
     tmp = ft_strdup(ft_strchr(*econtent, '\n') + 1);
-     free(*econtent);
+    *line = ft_strcdup(*econtent, '\n');
+    free(*econtent);
     *econtent = ft_strdup(tmp);
      free(tmp);
     return 1;
@@ -51,6 +52,7 @@ int ft_reader(int fd, char **econtent, char **line)
     {
         ft_bzero(buff, BUFF_SIZE);
         rd = read(fd, buff, BUFF_SIZE);
+        buff[BUFF_SIZE] = '\0';
         if (*econtent == NULL && rd != 0)
             *econtent = ft_strdup(buff);
         else if (rd != 0)
@@ -63,6 +65,7 @@ int ft_reader(int fd, char **econtent, char **line)
     if((ft_strlen(*econtent) != 0 && ft_strchr(*econtent, '\n')) || (ft_strlen(*econtent) != 0 && rd == 0))
         return(ft_cutter(rd, &*econtent, line, &buff));
     }
+    free(buff);
     return 0;
 }
 
@@ -89,7 +92,12 @@ int get_next_line(int fd, char **line)
 		ptr->content_size = fd;
     if(ft_strlen(econtent) != 0 && ft_strchr(econtent, '\n') != NULL)
         return ft_checker((char **)&ptr->content, line);
-    return (ft_reader(fd, (char **)&ptr->content, line));
+    if (ft_reader(fd, (char **)&ptr->content, line) == 0)
+    {
+        free(ptr);
+        free(head);
+        return 0;
+    }
 }
 # include <time.h>
 int     main()
