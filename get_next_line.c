@@ -15,25 +15,24 @@
 int ft_checker(char **econtent, char **line)
 {
     char *tmp;
-
     *line = ft_strcdup(*econtent, '\n');
     tmp = ft_strdup(ft_strchr(*econtent, '\n') + 1);
-    free(*econtent);
+    // free(*econtent);
     *econtent = ft_strdup(tmp);
-    free(tmp);
+
+    // free(tmp);
     return 1;
 }
 
 int     ft_cutter(int rd, char **econtent, char **line, char **buff)
 {
-  //  free(*buff);
+    free(*buff);
     if(*econtent && ft_strchr(*econtent, '\n'))
-    {
      ft_checker(econtent, line);
-    }
     else if (rd == 0)
     {
         *line = ft_strdup(*econtent);
+        *econtent = NULL;
         free(*econtent);
     }
     return 1;
@@ -46,11 +45,14 @@ int ft_reader(int fd, char **econtent, char **line)
     ssize_t rd;
 
     rd = 1;
-    buff = ft_memalloc(BUFF_SIZE);
-    while(rd > 0)//I think I need to put check in gnl
+    buff = ft_memalloc(BUFF_SIZE + 1);
+    ft_bzero(buff, BUFF_SIZE);
+
+    while(rd > 0)
     {
         ft_bzero(buff, BUFF_SIZE);
         rd = read(fd, buff, BUFF_SIZE);
+        buff[BUFF_SIZE + 1] = '\0';// Here it is
         if (*econtent == NULL && rd != 0)
             *econtent = ft_strdup(buff);
         else if (rd != 0)
@@ -103,13 +105,13 @@ int     main()
     ret = 1;
     int i = 0;
 
-    fd = open("bible.txt", O_RDONLY);
+     fd = open("bible.txt", O_RDONLY);
     while (get_next_line(fd, &line) > 0)
     {
         i++;
-      //  printf("ret = %d\n", ret);
         printf("%s\n", line);
-        free(line);
+       free(line);
+    
     }
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
