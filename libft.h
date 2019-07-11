@@ -6,14 +6,13 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 11:34:46 by zhelm             #+#    #+#             */
-/*   Updated: 2019/07/10 09:35:49 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/07/11 09:46:51 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include "get_next_line.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
