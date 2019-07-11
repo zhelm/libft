@@ -26,7 +26,7 @@ SRCS =	ft_atoi.c ft_bzero.c ft_isascii.c ft_isalnum.c ft_isalpha.c\
 	ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_strcdup.c\
 	ft_free_arr.c\
 
-OBJ = ft_atoi.o ft_bzero.o ft_isascii.o ft_isalnum.o ft_isalpha.o\
+OBJ =	ft_atoi.o ft_bzero.o ft_isascii.o ft_isalnum.o ft_isalpha.o\
 	ft_isdigit.o ft_isprint.o ft_memcpy.o ft_memccpy.o\
 	ft_memchr.o ft_memmove.o ft_memset.o ft_memcmp.o ft_strlen.o\
 	ft_strdup.o ft_strcpy.o ft_strncpy.o ft_strcat.o ft_strncat.o\
