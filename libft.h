@@ -6,17 +6,16 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 11:34:46 by zhelm             #+#    #+#             */
-/*   Updated: 2019/07/10 09:35:49 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/07/12 14:03:51 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include <unistd.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
-#include <stdio.h>
 
 typedef struct	s_list
 {
@@ -25,7 +24,6 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-//h_list 			*gnl_lstnew(int lst_num, void const *content, size_t fd);
 void			ft_free_arr(void **c);
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_lstiter(t_list *list, void(*f)(t_list *elem));
