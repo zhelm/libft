@@ -49,19 +49,19 @@ int ft_reader(int fd, char **econtent, char **line)
     { 
         ft_bzero(buff, BUFF_SIZE);
         rd = read(fd, buff, BUFF_SIZE);
-        buff[BUFF_SIZE] = '\0';
+        buff[rd] = '\0';
         if (*econtent == NULL)
             *econtent = ft_strdup(buff);
-        else
+        else if (rd)
         {
             tmp = ft_strjoin(*econtent, buff);
             ft_strdel(econtent);
-            *econtent = ft_strdup(tmp);
-            ft_strdel(&tmp);
+            *econtent = tmp;
         }
         if (**econtent != '\0' && (ft_strchr(buff, '\n') || rd == 0))
             return (ft_cutter(rd, &*econtent, line, &buff));
     }
+    ft_strdel(&buff);
     return 0;
 }
 
@@ -89,47 +89,3 @@ int get_next_line(int fd, char **line)
         return ft_checker((char **)&ptr->content, line);
     return (ft_reader(fd, (char **)&ptr->content, line));
 }
- /*#include <time.h>
- int main()
- {
-     int fd1, fd2, fd3;
-     char *line;
-     int i = 0;
-     fd1 = open("libft/Test_texts/test.txt", O_RDONLY);
-     fd2 = open("libft/Test_tests/test2.txt", O_RDONLY);
-     fd3 = open("libft/Test_tests/bible.txt", O_RDONLY);
-     printf("This is one\n");
-     while ((get_next_line(fd1, &line)) == 1)
-     {
-         printf("%s\n", line);
-         ft_strdel(&line);
-     }
-     i = 0;
-     printf("This is two\n");
-     while ((get_next_line(fd2, &line)) == 1)
-     {
-     printf("OK");
-         i++;
-         printf("%s\n", line);
-         ft_strdel(&line);
-     }
-     i = 0;
-     printf("This is one\n");
-     while ((get_next_line(fd1, &line)) == 1)
-     {
-         i++;
-         printf("%s\n", line);
-         ft_strdel(&line);
-     }
-     i = 0;
-     printf("This is 3\n");
-     while ((get_next_line(fd3, &line)) == 1)
-     {
-         i++;
-         printf("%s\n", line);
-         ft_strdel(&line);
-     }
-     ft_strdel(&line);
-     //sleep(30);
-    return 0;
-}*/
