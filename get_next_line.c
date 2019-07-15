@@ -87,7 +87,7 @@ int get_next_line(int fd, char **line)
         return ft_checker((char **)&ptr->content, line);
     return (ft_reader(fd, (char **)&ptr->content, line));
 }
- #include <time.h>
+/* #include <time.h>
  int main()
  {
      int fd1, fd2, fd3;
@@ -109,7 +109,7 @@ int get_next_line(int fd, char **line)
      sleep(30);
      i = 0;
      printf("This is two\n");
-     /*while ((get_next_line(fd2, &line)) == 1)
+     while ((get_next_line(fd2, &line)) == 1)
      {
      printf("OK");
          i++;
@@ -133,6 +133,6 @@ int get_next_line(int fd, char **line)
          ft_strdel(&line);
      }
      ft_strdel(&line);
-     //sleep(30);*/
+     //sleep(30);
     return 0;
-}
+}*/
