@@ -6,7 +6,7 @@
 /*   By: zhelm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:44:02 by zhelm             #+#    #+#             */
-/*   Updated: 2019/06/20 13:18:28 by zhelm            ###   ########.fr       */
+/*   Updated: 2019/07/12 14:08:04 by zhelm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t		ft_strlen(const char *s)
 
 	len = 0;
 	if (!s)
-		return 0;
+		return (0);
 	while (s[len])
 		len++;
 	return (len);
