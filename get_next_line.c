@@ -15,18 +15,19 @@
 int ft_checker(char **econtent, char **line)
 {
     char *tmp;
+    size_t i;
 
-    *line = ft_strcdup(*econtent, '\n');
-    tmp = ft_strdup(ft_strchr(*econtent, '\n') + 1);
-    ft_strdel(econtent);
-    *econtent = ft_strdup(tmp);
-    ft_strdel(&tmp);
+    i = 0;
+    tmp = *econtent;
+    while(tmp[i] != '\n')
+	    i++;
+    *line = ft_strsub(tmp, 0, i--);
+    *econtent = ft_strdup(ft_strchr(tmp, '\n') + 1);
     return 1;
 }
 
-int ft_cutter(int rd, char **econtent, char **line, char **buff)
+int ft_cutter(int rd, char **econtent, char **line)
 {
-    ft_strdel(buff);
     if (ft_strchr(*econtent, '\n'))
         ft_checker(econtent, line);
     else if (rd == 0)
@@ -39,28 +40,25 @@ int ft_cutter(int rd, char **econtent, char **line, char **buff)
 
 int ft_reader(int fd, char **econtent, char **line)
 {
-    char *buff;
+    char buff[BUFF_SIZE + 1];
     char *tmp;
     ssize_t rd;
 
     rd = 1;
-    buff = malloc(BUFF_SIZE + 1);
     while (rd > 0)
     { 
-        ft_bzero(buff, BUFF_SIZE);
         rd = read(fd, buff, BUFF_SIZE);
-        buff[BUFF_SIZE] = '\0';
+        buff[rd] = '\0';
         if (*econtent == NULL)
             *econtent = ft_strdup(buff);
         else
         {
             tmp = ft_strjoin(*econtent, buff);
             ft_strdel(econtent);
-            *econtent = ft_strdup(tmp);
-            ft_strdel(&tmp);
+            *econtent = tmp;
         }
         if (**econtent != '\0' && (ft_strchr(buff, '\n') || rd == 0))
-            return (ft_cutter(rd, &*econtent, line, &buff));
+            return (ft_cutter(rd, &*econtent, line));
     }
     return 0;
 }
@@ -89,24 +87,29 @@ int get_next_line(int fd, char **line)
         return ft_checker((char **)&ptr->content, line);
     return (ft_reader(fd, (char **)&ptr->content, line));
 }
- /*#include <time.h>
+ #include <time.h>
  int main()
  {
      int fd1, fd2, fd3;
      char *line;
      int i = 0;
-     fd1 = open("libft/Test_texts/test.txt", O_RDONLY);
-     fd2 = open("libft/Test_tests/test2.txt", O_RDONLY);
-     fd3 = open("libft/Test_tests/bible.txt", O_RDONLY);
+     int a = 0;
+    // fd1 = open("Test_texts/test.txt", O_RDONLY);
+     //fd2 = open("Test_tests/test2.txt", O_RDONLY);
+     fd1 = open("bible.txt", O_RDONLY);
      printf("This is one\n");
+     printf("%d", fd1);
      while ((get_next_line(fd1, &line)) == 1)
      {
+	     a++;
          printf("%s\n", line);
          ft_strdel(&line);
+	 printf("%d", a);
      }
+     sleep(30);
      i = 0;
      printf("This is two\n");
-     while ((get_next_line(fd2, &line)) == 1)
+     /*while ((get_next_line(fd2, &line)) == 1)
      {
      printf("OK");
          i++;
@@ -130,6 +133,6 @@ int get_next_line(int fd, char **line)
          ft_strdel(&line);
      }
      ft_strdel(&line);
-     //sleep(30);
+     //sleep(30);*/
     return 0;
-}*/
+}
